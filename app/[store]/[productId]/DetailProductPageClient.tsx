@@ -1,0 +1,185 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { MouseEventHandler, useEffect, useState } from "react";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
+import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
+import { Rupiah } from "@jetmiky/rupiahjs";
+import { BsArrowUpRight } from "react-icons/bs";
+import { DollarSign, Loader2 } from "lucide-react";
+import { Product, ProductAsset, Store } from "@prisma/client";
+import AssetCard from "@/components/card/AssetCard";
+import { ProductImageCarousel } from "@/components/ProductImageCarousel";
+import { ExtendedSession } from "@/next-auth";
+import useCart from "@/hooks/useCart";
+
+interface DetailProductPageClientProps {
+  product: Product & {
+    store: Store;
+    productAssets: ProductAsset[];
+  };
+  session: ExtendedSession;
+}
+
+const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
+  product,
+  session,
+}) => {
+  const cart = useCart();
+  const router = useRouter();
+  const [token, setToken] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const storeUrl =
+    product.store.name.split(" ").length > 1
+      ? product.store.name.replace(/\s+/g, "-")
+      : product.store.name;
+
+  const price = new Rupiah(Number(product.price));
+  const isProductOwner = session?.id === product.store.userId;
+
+  const handleAddToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    cart.addItem(product);
+  };
+
+  const handleCheckOut = async () => {
+    try {
+      const response = await axios.post("/api/midtrans/transactions", {
+        productIds: [product.id],
+        totalPrice: product.price,
+      });
+      setToken(response.data.token);
+      cart.removeAll();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else if (error instanceof AxiosError) {
+        toast.error(error.response?.data);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      // @ts-expect-error
+      window.snap.pay(token, {
+        onSuccess: () => {
+          router.push("/orders");
+          toast.success("Payment success!");
+        },
+        onPending: () => {
+          router.push("/orders");
+          toast("Waiting your payment..");
+        },
+        onError: () => {
+          toast.error("Payment failed, something went wrong");
+        },
+        onClose: () => {
+          router.push("/orders");
+          toast.error("You have not completed the payment.");
+        },
+      });
+    }
+  }, [token, router]);
+
+  useEffect(() => {
+    const midtransUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransUrl;
+    scriptTag.setAttribute("data-client-key", process.env.MIDTRANS_CLIENT_KEY!);
+
+    document.body.appendChild(scriptTag);
+
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
+
+  return (
+    <div className="container px-0">
+      <div className="flex flex-col gap-8 md:flex-row md:gap-16">
+        <ProductImageCarousel
+          className="w-full md:w-1/2"
+          images={product?.images ?? []}
+          options={{
+            loop: true,
+          }}
+        />
+        <div className="flex flex-col w-full gap-4 md:w-1/2">
+          <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-00">
+            <div className="flex items-center gap-2">
+              <Avatar className="border border-gray-300 w-9 h-9">
+                <AvatarImage
+                  src={product?.store?.image || "/assets/blank-user.jpg"}
+                  alt="avatar"
+                />
+              </Avatar>
+              <span className="text-lg font-medium">
+                {product?.store?.name}
+              </span>
+            </div>
+            <div className="flex items-center gap-1 mr-2 cursor-pointer">
+              <BsArrowUpRight className="text-sm" />
+            </div>
+          </div>
+          <p className="text-3xl font-medium">{product?.name}</p>
+          <p className="text-gray-400">{price.getCurrency("Rp", "dot")}</p>
+          <div className="flex items-center gap-2">
+            <Button className="h-8 text-xs" onClick={() => handleCheckOut()}>
+              Buy now
+            </Button>
+            <Button
+              variant="outline"
+              className="h-8 text-xs"
+              onClick={handleAddToCart}
+            >
+              Add to cart
+            </Button>
+          </div>
+          <Separator />
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full"
+            defaultValue="description"
+          >
+            <AccordionItem value="description">
+              <AccordionTrigger>Description</AccordionTrigger>
+              <AccordionContent>{product?.description}</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <div className="flex flex-col gap-4">
+            <p className="font-medium">Assets</p>
+            <div className="flex flex-col gap-3 md:flex-row">
+              {product?.productAssets?.map((asset) => (
+                <AssetCard
+                  key={asset.id}
+                  assetData={asset}
+                  type="publish"
+                  isOwnProduct={isProductOwner}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DetailProductPageClient;
