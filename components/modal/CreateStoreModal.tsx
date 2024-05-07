@@ -69,10 +69,10 @@ const CreateStoreModal = () => {
         reset();
         setStep(STEPS.PROFILE_STORE);
         createStoreModal.onClose();
-        toast.success("Store Created");
+        toast.success("Toko berhasil dibuat!");
       })
       .catch(() => {
-        toast.error("Something went wrong");
+        toast.error("Terjadi kesalahan!");
       })
       .finally(() => {
         setIsLoading(false);
@@ -81,21 +81,21 @@ const CreateStoreModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.INFO_STORE) {
-      return "Create";
+      return "Simpan";
     }
-    return "Next";
+    return "Selanjutnya";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.PROFILE_STORE) {
       return undefined;
     }
-    return "Back";
+    return "Kembali";
   }, [step]);
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
-      <Heading title="Set your profile store!" subtitle="Step 1 of 2" />
+      <Heading title="Atur profil toko anda!" subtitle="Langkah 1 dari 2" />
       <div className="flex flex-col items-center justify-center w-full gap-10">
         <div>
           <UploadthingInput
@@ -120,10 +120,10 @@ const CreateStoreModal = () => {
   if (step === STEPS.INFO_STORE) {
     bodyContent = (
       <div className="flex flex-col gap-8">
-        <Heading title="Set your store information!" subtitle="Step 2 of 2" />
+        <Heading title="Atur informasi toko!" subtitle="Step 2 of 2" />
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <span>Confirm your email</span>
+            <span>Email</span>
             <Input
               id="email"
               disabled={isLoading}
@@ -137,7 +137,7 @@ const CreateStoreModal = () => {
           </div>
           <div className="flex flex-col gap-2 md:flex-row">
             <div className="w-full">
-              <label>Country</label>
+              <label>Negara</label>
               <Input
                 id="country"
                 disabled={isLoading}
@@ -150,7 +150,7 @@ const CreateStoreModal = () => {
               />
             </div>
             <div className="w-full">
-              <label>City</label>
+              <label>Kota</label>
               <Input
                 id="city"
                 disabled={isLoading}
@@ -164,7 +164,7 @@ const CreateStoreModal = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <span>Address</span>
+            <span>Alamat</span>
             <Input
               id="address"
               disabled={isLoading}
@@ -177,7 +177,7 @@ const CreateStoreModal = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <span>Describe your store</span>
+            <span>Deskripsi</span>
             <Textarea
               id="description"
               disabled={isLoading}
@@ -196,7 +196,7 @@ const CreateStoreModal = () => {
 
   return (
     <Modal
-      title="Create store account"
+      title="Buat Toko Anda"
       isOpen={createStoreModal.isOpen}
       onClose={createStoreModal.onClose}
       onSubmit={handleSubmit(onSubmit)}

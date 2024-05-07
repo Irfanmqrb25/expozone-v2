@@ -40,7 +40,7 @@ const AvatarProfile = ({
       {session ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="cursor-pointer">
-            <Avatar className="w-8 h-8">
+            <Avatar className="w-9 h-9">
               <AvatarImage
                 src={session?.image || "/assets/blank-user.jpg"}
                 alt="image user"
@@ -63,25 +63,25 @@ const AvatarProfile = ({
               <Link href="/profile">
                 <DropdownMenuItem className="cursor-pointer">
                   <UserIcon className="w-4 h-4 mr-2" />
-                  <span>Profile</span>
+                  <span>Profil</span>
                 </DropdownMenuItem>
               </Link>
               <Link href="/assets">
                 <DropdownMenuItem className="flex items-center cursor-pointer">
                   <FolderArchive className="w-4 h-4 mr-2" />
-                  <span>Assets</span>
+                  <span>Aset</span>
                 </DropdownMenuItem>
               </Link>
               <Link href="/favorites">
                 <DropdownMenuItem className="flex items-center cursor-pointer">
                   <Heart className="w-4 h-4 mr-2" />
-                  <span>Favorites</span>
+                  <span>Favorit</span>
                 </DropdownMenuItem>
               </Link>
               <Link href="/orders">
                 <DropdownMenuItem className="flex items-center cursor-pointer">
                   <ShoppingBag className="w-4 h-4 mr-2" />
-                  <span>Order History</span>
+                  <span>Pemesanan</span>
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>

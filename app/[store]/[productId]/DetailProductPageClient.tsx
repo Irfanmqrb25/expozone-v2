@@ -19,12 +19,12 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { Rupiah } from "@jetmiky/rupiahjs";
 import { BsArrowUpRight } from "react-icons/bs";
-import { DollarSign, Loader2 } from "lucide-react";
 import { Product, ProductAsset, Store } from "@prisma/client";
 import AssetCard from "@/components/card/AssetCard";
 import { ProductImageCarousel } from "@/components/ProductImageCarousel";
 import { ExtendedSession } from "@/next-auth";
 import useCart from "@/hooks/useCart";
+import { Loader2 } from "lucide-react";
 
 interface DetailProductPageClientProps {
   product: Product & {
@@ -49,7 +49,6 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
       : product.store.name;
 
   const price = new Rupiah(Number(product.price));
-  const isProductOwner = session?.id === product.store.userId;
 
   const handleAddToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
@@ -57,6 +56,7 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
   };
 
   const handleCheckOut = async () => {
+    setLoading(true);
     try {
       const response = await axios.post("/api/midtrans/transactions", {
         productIds: [product.id],
@@ -70,6 +70,8 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
       } else if (error instanceof AxiosError) {
         toast.error(error.response?.data);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,34 +123,42 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
           }}
         />
         <div className="flex flex-col w-full gap-4 md:w-1/2">
-          <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-00">
-            <div className="flex items-center gap-2">
-              <Avatar className="border border-gray-300 w-9 h-9">
-                <AvatarImage
-                  src={product?.store?.image || "/assets/blank-user.jpg"}
-                  alt="avatar"
-                />
-              </Avatar>
-              <span className="text-lg font-medium">
-                {product?.store?.name}
-              </span>
+          <Link href={`/store/${storeUrl}`} className="hover:bg-gray-100">
+            <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-00">
+              <div className="flex items-center gap-2">
+                <Avatar className="border border-gray-300 w-9 h-9">
+                  <AvatarImage
+                    loading="lazy"
+                    src={product?.store?.image || "/assets/blank-user.jpg"}
+                    alt="avatar"
+                  />
+                </Avatar>
+                <span className="text-lg font-medium">
+                  {product?.store?.name}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 mr-2 cursor-pointer">
+                <BsArrowUpRight className="text-sm" />
+              </div>
             </div>
-            <div className="flex items-center gap-1 mr-2 cursor-pointer">
-              <BsArrowUpRight className="text-sm" />
-            </div>
-          </div>
+          </Link>
           <p className="text-3xl font-medium">{product?.name}</p>
           <p className="text-gray-400">{price.getCurrency("Rp", "dot")}</p>
           <div className="flex items-center gap-2">
-            <Button className="h-8 text-xs" onClick={() => handleCheckOut()}>
-              Buy now
+            <Button
+              className="flex items-center h-8 gap-2 text-xs"
+              disabled={loading}
+              onClick={() => handleCheckOut()}
+            >
+              {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+              Beli sekarang
             </Button>
             <Button
               variant="outline"
               className="h-8 text-xs"
               onClick={handleAddToCart}
             >
-              Add to cart
+              Tambah ke keranjang
             </Button>
           </div>
           <Separator />
@@ -159,20 +169,15 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
             defaultValue="description"
           >
             <AccordionItem value="description">
-              <AccordionTrigger>Description</AccordionTrigger>
+              <AccordionTrigger>Deskripsi</AccordionTrigger>
               <AccordionContent>{product?.description}</AccordionContent>
             </AccordionItem>
           </Accordion>
           <div className="flex flex-col gap-4">
-            <p className="font-medium">Assets</p>
+            <p className="font-medium">Aset</p>
             <div className="flex flex-col gap-3 md:flex-row">
               {product?.productAssets?.map((asset) => (
-                <AssetCard
-                  key={asset.id}
-                  assetData={asset}
-                  type="publish"
-                  isOwnProduct={isProductOwner}
-                />
+                <AssetCard key={asset.id} assetData={asset} type="publish" />
               ))}
             </div>
           </div>

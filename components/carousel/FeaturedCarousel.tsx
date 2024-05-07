@@ -3,14 +3,46 @@
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
+import { Autoplay, Navigation, EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 
-import { featuredCarouselImage } from "@/lib/data";
 import clsx from "clsx";
+import { Libre_Baskerville } from "next/font/google";
+
+const font = Libre_Baskerville({
+  weight: ["700"],
+  subsets: ["latin"],
+});
 
 const FeaturedCarousel = () => {
+  const featuredCarouselImage = [
+    {
+      id: 4,
+      color: "bg-[#AA77FF]",
+      title: "Model dan Aset Gambar",
+      src: "/assets/carousel/featured-4.webp",
+    },
+    {
+      id: 1,
+      color: "bg-[#D862BC] text-white",
+      title: "Font dan Tipografi",
+      src: "/assets/carousel/featured-1.jpg",
+    },
+    {
+      id: 2,
+      color: "bg-[#CDCDC8]",
+      title: "E-Book dan Tulisan",
+      src: "/assets/carousel/featured-2.jpg",
+    },
+    {
+      id: 3,
+      color: "bg-[#006E7F] text-white",
+      title: "Website dan Aplikasi Templates",
+      src: "/assets/carousel/featured-3.jpg",
+    },
+  ];
+
   return (
     <>
       <Swiper
@@ -23,7 +55,7 @@ const FeaturedCarousel = () => {
         pagination={{ clickable: true }}
         navigation={true}
         loop={true}
-        modules={[Autoplay, Pagination, Navigation, EffectFade]}
+        modules={[Autoplay, Navigation, EffectFade]}
         effect="fade"
         className="mySwiper h-[340px] md:h-[440px]"
       >
@@ -44,22 +76,14 @@ const FeaturedCarousel = () => {
               <div className="absolute top-6 -bottom-11 right-1 left-1 md:bottom-0 md:left-0 md:right-0 w-[70%] h-[70%] m-auto text-center md:top-0 md:w-fit md:h-fit">
                 <div
                   className={clsx(
-                    "flex flex-col gap-3 px-5 py-5 md:px-16 md:py-8 rounded-sm border-2 border-black md:rounded-md",
-                    item.color
+                    "px-5 py-5 md:px-16 md:py-8 rounded-sm border-2 my-shadow border-black md:rounded-md",
+                    item.color,
+                    font.className
                   )}
                 >
-                  <h1 className="text-sm font-medium underline uppercase md:text-lg">
+                  <h1 className="text-sm font-bold tracking-wider uppercase md:text-lg lg:text-xl">
                     {item.title}
                   </h1>
-                  <div className="flex flex-col gap-2 mb-2">
-                    <p className="hidden text-lg font-medium md:text-2xl md:block">
-                      {item.description}
-                    </p>
-                    <p className="text-sm md:text-base">
-                      {item.secDescription}
-                    </p>
-                  </div>
-                  <p></p>
                 </div>
               </div>
             </div>

@@ -29,10 +29,10 @@ const CellActionsProduct: React.FC<CellActionsProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/product/${data.id}`);
-      toast.success("Product has been deleted.");
+      toast.success("Produk telah di hapus.");
       router.refresh();
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan.");
     } finally {
       setLoading(false);
     }
@@ -53,18 +53,18 @@ const CellActionsProduct: React.FC<CellActionsProps> = ({ data }) => {
             href={`/store/products/${data.id}/detail`}
           >
             <Rocket size={15} className="mr-1" />
-            Details
+            Detil
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => router.push(`/store/products/${data.id}`)}
         >
           <Edit size={15} className="mr-1" />
-          Edit
+          Ubah
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onConfirm} className="text-red-500">
           <Trash size={15} className="mr-1" />
-          Delete
+          Hapus
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

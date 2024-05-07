@@ -11,7 +11,7 @@ const OrderDetailsPage = async ({
   return (
     <div className="flex flex-col space-y-4">
       <div>
-        <h1 className="text-2xl font-semibold">Order Details</h1>
+        <h1 className="text-2xl font-semibold">Detil Pemesanan</h1>
         <p className="text-muted-foreground">ID: {params.orderId}</p>
       </div>
       <OrderDetails data={orderItems} />

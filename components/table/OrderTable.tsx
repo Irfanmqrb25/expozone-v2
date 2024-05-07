@@ -69,24 +69,24 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
     },
     {
       accessorKey: "product",
-      header: "Product",
+      header: "Produk",
       cell: ({ row }) => <p>{row.original.product.name}</p>,
     },
     {
       accessorKey: "product",
-      header: "Price",
+      header: "Harga",
       cell: ({ row }) => (
         <p>{rupiahFormat(Number(row.original.product.price))}</p>
       ),
     },
     {
       accessorKey: "order",
-      header: "Status",
+      header: "Status Pembelian",
       cell: ({ row }) => <p>{row.original.order.status}</p>,
     },
     {
       accessorKey: "createdAt",
-      header: "Created At",
+      header: "Dipesan Pada",
     },
     {
       id: "actions",
@@ -98,9 +98,9 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
     try {
       await axios.delete(`/api/order/${orderId}`);
       router.refresh();
-      toast.success("Order has been deleted.");
+      toast.success("Pesanan telah di hapus.");
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan.");
     }
   }
 

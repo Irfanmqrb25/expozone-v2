@@ -1,64 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogHeader, DialogContent, DialogTitle } from "../ui/dialog";
-import { Input } from "../ui/input";
-import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+
 import { Button } from "../ui/button";
-import clsx from "clsx";
+import { Search } from "lucide-react";
+import { toast } from "sonner";
 
-interface SearchProductProps {
-  className?: string;
-}
-
-const SearchProduct = ({ className }: SearchProductProps) => {
-  const [open, setOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchProduct = () => {
+  const [query, setQuery] = useState("");
   const router = useRouter();
 
-  const handleSearch = () => {
-    router.push(`/discover/search?st=${searchTerm}`);
-    setOpen(false);
+  const onSearch = () => {
+    if (!query) {
+      return toast.error("Masukkan nama produk!");
+    }
+    router.push(`/discover/search/?st=${query}`);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onSearch();
+    }
   };
 
   return (
-    <div className="flex items-center justify-between gap-2">
-      <button
-        className={clsx(
-          "flex items-center justify-between gap-2 px-2 py-[5px] rounded-sm",
-          className
-        )}
-        onClick={() => setOpen((prev) => !prev)}
-        type="button"
+    <div className="relative">
+      <input
+        className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border-2 border-black rounded-full shadow-search focus:outline-none"
+        placeholder="Masukkan nama produk..."
+        type="search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyPress}
+      />
+      <Button
+        className="absolute -translate-y-1/2 rounded-full right-2 top-1/2 h-7 w-7"
+        size="icon"
       >
-        <p className="text-sm text-muted-foreground">
-          {searchTerm === "" ? "Search..." : searchTerm}
-        </p>
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-black opacity-100">
-          <Search size={14} />
-        </kbd>
-      </button>
-      <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
-        <DialogContent>
-          <DialogHeader className="text-start">
-            <DialogTitle>Search Products</DialogTitle>
-          </DialogHeader>
-          <div className="flex items-center gap-3">
-            <Input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Button
-              onClick={handleSearch}
-              className="flex items-center gap-1 md:w-fit"
-            >
-              <Search size={16} />
-              <span className="hidden md:block">Search</span>
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+        <Search className="w-4 h-4 text-gray-100" />
+      </Button>
     </div>
   );
 };

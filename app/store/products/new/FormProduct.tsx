@@ -67,10 +67,10 @@ const FormProduct = () => {
       await axios.post("/api/product", data);
       router.refresh();
       router.push("/store/products");
-      toast.success("Produk has been added.");
+      toast.success("Produk baru telah ditambahkan.");
       form.reset();
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan.");
     }
   };
 
@@ -83,9 +83,9 @@ const FormProduct = () => {
           render={({ field }) => (
             <FormItem>
               <div>
-                <FormLabel>Image</FormLabel>
+                <FormLabel>Gambar Produk</FormLabel>
                 <p className="text-sm text-muted-foreground">
-                  maximum of 3 images allowed
+                  makasimal 3 gambar untuk diunggah.
                 </p>
               </div>
               <FormControl>
@@ -110,13 +110,9 @@ const FormProduct = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Nama Produk</FormLabel>
               <FormControl>
-                <Input
-                  disabled={isLoading}
-                  placeholder="Product Name"
-                  {...field}
-                />
+                <Input disabled={isLoading} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -127,7 +123,7 @@ const FormProduct = () => {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Category</FormLabel>
+              <FormLabel>Kategori Produk</FormLabel>
               <Select
                 disabled={isLoading}
                 onValueChange={field.onChange}
@@ -135,7 +131,7 @@ const FormProduct = () => {
               >
                 <FormControl>
                   <SelectTrigger disabled={isLoading}>
-                    <SelectValue placeholder="Select product category" />
+                    <SelectValue placeholder="Pilih Kategori Produk" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -155,7 +151,7 @@ const FormProduct = () => {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Price</FormLabel>
+              <FormLabel>Harga Produk</FormLabel>
               <FormControl>
                 <CurrencyInput
                   disabled={isLoading}
@@ -177,13 +173,9 @@ const FormProduct = () => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Deskripsi Produk</FormLabel>
               <FormControl>
-                <Textarea
-                  disabled={isLoading}
-                  placeholder="Product description"
-                  {...field}
-                />
+                <Textarea disabled={isLoading} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -202,14 +194,14 @@ const FormProduct = () => {
                 />
               </FormControl>
               <FormLabel className="text-sm font-normal">
-                Check if you want this product to be featured in your store.
+                Ceklis untuk memfiturkan produk ini pada toko anda.
               </FormLabel>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="space-y-2">
-          <FormLabel>Asset</FormLabel>
+          <FormLabel>Aset Produk</FormLabel>
           <div className="flex items-center gap-4">
             <Button
               size="sm"
@@ -226,7 +218,7 @@ const FormProduct = () => {
               }}
             >
               <HiLink className="w-4 h-4" />
-              Upload File With Link
+              Unggah Menggunakan External Link
             </Button>
             <span>or</span>
             <Button
@@ -244,7 +236,7 @@ const FormProduct = () => {
               }}
             >
               <HiComputerDesktop className="w-4 h-4" />
-              Upload File From Computer
+              Unggah File Dari Komputer
             </Button>
           </div>
           {uploadWithLink && (
@@ -258,7 +250,7 @@ const FormProduct = () => {
                     <FormControl>
                       <Input
                         type="url"
-                        placeholder="type your url asset here..."
+                        placeholder="masukkan link penyimpanan aset anda..."
                         className="pl-8"
                         value={field.value as any}
                         onChange={field.onChange}
@@ -299,7 +291,7 @@ const FormProduct = () => {
         </div>
         <Button type="submit" className="flex items-center w-full gap-2">
           {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
-          Submit
+          Tambah
         </Button>
       </form>
     </Form>

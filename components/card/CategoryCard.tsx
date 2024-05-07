@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import { Card, CardContent } from "../ui/card";
+import { Card } from "../ui/card";
+import { cn } from "@/lib/utils";
 import { IconType } from "react-icons";
-import clsx from "clsx";
 
 interface CategoryCardProps {
   href: string;
@@ -21,7 +21,12 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
 }) => {
   return (
     <Link href={href}>
-      <Card className={clsx("p-4 border-2 border-black shadow-card", color)}>
+      <Card
+        className={cn(
+          "p-4 border-2 border-black my-shadow hover:shadow-none transition-all hover:translate-x-1 hover:translate-y-1",
+          color
+        )}
+      >
         <div>
           <Icon className="text-2xl" />
         </div>

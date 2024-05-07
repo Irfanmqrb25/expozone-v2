@@ -1,5 +1,5 @@
-import MainNav from "@/components/navbar/MainNav";
 import Container from "@/components/Container";
+import MainNav from "@/components/navbar/MainNav";
 
 import getStore from "@/actions/getStore";
 import { getCurrentUser } from "@/data/get-user";
@@ -13,11 +13,11 @@ export default async function Layout({
   const session = await getCurrentUser();
 
   return (
-    <>
+    <div className="h-full">
       <MainNav session={session} store={store!} />
       <Container>
-        <div className="min-h-screen pt-20">{children}</div>
+        <div className="py-20">{children}</div>
       </Container>
-    </>
+    </div>
   );
 }

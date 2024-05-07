@@ -1,15 +1,12 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import Container from "../Container";
-import MobileSheet from "./MobileSheet";
-
-import Link from "next/link";
-
+import SearchNav from "./SearchNav";
 import CartSheet from "./CartSheet";
+import MobileSheet from "./MobileSheet";
 import AvatarProfile from "./AvatarProfile";
-import SearchProduct from "../input/SearchProduct";
 
 import { Store } from "@prisma/client";
 import { ExtendedSession } from "@/next-auth";
@@ -51,7 +48,7 @@ const MainNav: React.FC<MainNavProps> = ({ session, store }) => {
           </div>
         </div>
         <div className="flex items-center justify-end gap-2 md:gap-3">
-          <SearchProduct className="w-fit md:w-[300px] border-2 border-white" />
+          <SearchNav />
           {session ? (
             <div className="flex items-center gap-3">
               <CartSheet />

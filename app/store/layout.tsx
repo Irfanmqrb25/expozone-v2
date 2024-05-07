@@ -6,6 +6,7 @@ import CreateStoreModal from "@/components/modal/CreateStoreModal";
 
 import getStore from "@/actions/getStore";
 import { getCurrentUser } from "@/data/get-user";
+import { Store } from "lucide-react";
 
 export default async function Layout({
   children,
@@ -23,16 +24,16 @@ export default async function Layout({
         <div className="h-full pt-16">
           {store && (
             <div className="mb-5 space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="relative w-8 h-8 overflow-hidden border-2 border-gray-300 rounded-full md:w-10 md:h-10">
-                  <Image
-                    src={store?.image || "/assets/blank-user.jpg"}
-                    alt="Store Profile"
-                    fill
-                    className="object-cover object-center"
-                  />
+              <div>
+                <div className="flex items-center gap-2">
+                  <Store size={26} />
+                  <h1 className="text-xl font-bold tracking-tight text-transparent md:text-2xl lg:text-3xl bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text">
+                    Toko Saya
+                  </h1>
                 </div>
-                <p className="text-2xl font-medium">{store?.name}</p>
+                <p className="mt-2 text-base text-gray-500 dark:text-gray-400">
+                  Kelola toko dan produk anda.
+                </p>
               </div>
               <StoreTabs />
             </div>

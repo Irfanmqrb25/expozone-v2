@@ -11,19 +11,19 @@ const StoreTabs = () => {
 
   const tabs = [
     {
-      title: "Store",
+      title: "Profil",
       href: `/store`,
     },
     {
-      title: "Products",
+      title: "Produk",
       href: `/store/products`,
     },
     {
-      title: "Orders",
+      title: "Pesanan",
       href: `/store/orders`,
     },
     {
-      title: "Reviews",
+      title: "Ulasan",
       href: `/store/reviews`,
     },
   ];

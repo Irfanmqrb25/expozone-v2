@@ -69,24 +69,24 @@ export default function ProductTable({
     },
     {
       accessorKey: "name",
-      header: "Name",
+      header: "Produk",
     },
     {
       accessorKey: "category",
-      header: "Category",
+      header: "Kategori",
     },
     {
       accessorKey: "price",
-      header: "Price",
+      header: "Harga",
       cell: ({ row }) => <p>{rupiahFormat(Number(row.original.price))}</p>,
     },
     {
       accessorKey: "isFeatured",
-      header: "Featured",
+      header: "Unggulan",
     },
     {
       accessorKey: "createdAt",
-      header: "Created At",
+      header: "Dibuat Pada",
     },
     {
       id: "actions",

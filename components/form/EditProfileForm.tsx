@@ -62,8 +62,8 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
 
   return (
     <CardEditUser
-      title="My Profile"
-      description="Update your profile information"
+      title="Profile Saya"
+      description="Anda dapat mengedit profil di sini."
     >
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
@@ -86,9 +86,9 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
             name="name"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Nama</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your name" {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -102,7 +102,6 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your email"
                     {...field}
                     disabled={user.isOAuth === true || isPending ? true : false}
                   />
@@ -113,7 +112,7 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
           />
           <div className="flex items-center justify-end">
             <Button type="submit" disabled={isPending}>
-              Save
+              Simpan
             </Button>
           </div>
         </form>

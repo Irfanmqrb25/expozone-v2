@@ -46,10 +46,10 @@ const OrderDetails = ({ data }: OrderDetailsProps) => {
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[80px] hidden md:table-cell">
-                      Image
+                      Gambar
                     </TableHead>
-                    <TableHead className="max-w-[150px]">Name</TableHead>
-                    <TableHead>Quantity</TableHead>
+                    <TableHead className="max-w-[150px]">Produk</TableHead>
+                    <TableHead>Jumlah</TableHead>
                     <TableHead>Price</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -83,7 +83,7 @@ const OrderDetails = ({ data }: OrderDetailsProps) => {
         </div>
         <Card className="md:col-span-4 lg:col-span-2">
           <CardHeader>
-            <CardTitle>Order Summary</CardTitle>
+            <CardTitle>Ringkasan Pemesanan</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-4">
             {data.map((item) => (
@@ -96,7 +96,7 @@ const OrderDetails = ({ data }: OrderDetailsProps) => {
             ))}
             <Separator />
             <div className="flex items-center font-medium">
-              <div>Total</div>
+              <div>Total Dibayar :</div>
               <div className="ml-auto">{rupiahFormat(totalPrice)}</div>
             </div>
           </CardContent>
@@ -104,8 +104,8 @@ const OrderDetails = ({ data }: OrderDetailsProps) => {
       </div>
       <Card className="px-8 py-6 space-y-10">
         <CardHeader className="p-0">
-          <CardTitle className="">Assets</CardTitle>
-          <CardDescription>Download your assets below!</CardDescription>
+          <CardTitle className="">Aset</CardTitle>
+          <CardDescription>Download aset yang telah anda beli</CardDescription>
         </CardHeader>
         <div className="space-y-4">
           {data.map((item) =>
@@ -118,7 +118,7 @@ const OrderDetails = ({ data }: OrderDetailsProps) => {
                   <div>
                     <p className="font-medium">{asset.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      by {item.product.store.name}
+                      oleh {item.product.store.name}
                     </p>
                   </div>
                 </div>

@@ -41,8 +41,10 @@ const OrderPage = async ({
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-3xl font-medium">Order</p>
-        <p className="text-muted-foreground">See Your Transaction History</p>
+        <p className="text-3xl font-medium">Pesanan Saya</p>
+        <p className="text-muted-foreground">
+          Lihat semua riwayat pemesanan anda
+        </p>
       </div>
       <OrderTabs />
       <div className="px-1 py-4 space-y-6">

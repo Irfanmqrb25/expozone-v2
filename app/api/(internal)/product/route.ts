@@ -72,6 +72,49 @@ export async function GET(request: Request) {
     const query = searchParams.get("st") ?? "";
     const decodedQuery = decodeURIComponent(query);
 
+    if (decodedQuery === "new-arrival") {
+      const products = await db.product.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        include: {
+          store: true,
+        },
+        take: 20,
+      });
+      return NextResponse.json(products);
+    }
+
+    if (decodedQuery === "best-selling") {
+      const bestSellingProducts = await db.orderItem.groupBy({
+        by: ["productId"],
+        _count: {
+          id: true,
+        },
+        orderBy: {
+          _count: {
+            id: "desc",
+          },
+        },
+        take: 20,
+      });
+
+      const productIds = bestSellingProducts.map((item) => item.productId);
+
+      const topProducts = await db.product.findMany({
+        where: {
+          id: {
+            in: productIds,
+          },
+        },
+        include: {
+          store: true,
+        },
+      });
+
+      return NextResponse.json(topProducts);
+    }
+
     const products = await db.product.findMany({
       where: {
         OR: [

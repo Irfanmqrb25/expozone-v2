@@ -50,8 +50,8 @@ const ChangePasswordForm = () => {
 
   return (
     <CardEditUser
-      title="Change Password"
-      description="Update your account password."
+      title="Ubah Password"
+      description="Anda dapat mengubah password akun anda disini."
     >
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
@@ -60,7 +60,7 @@ const ChangePasswordForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Current Password</FormLabel>
+                <FormLabel>Password Saat Ini</FormLabel>
                 <FormControl>
                   <PasswordInput
                     placeholder="******"
@@ -76,7 +76,7 @@ const ChangePasswordForm = () => {
             name="newPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>New Password</FormLabel>
+                <FormLabel>Password Baru</FormLabel>
                 <FormControl>
                   <PasswordInput
                     {...field}
@@ -93,7 +93,7 @@ const ChangePasswordForm = () => {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel>Confirm New Password</FormLabel>
+                <FormLabel>Konfirmasi Password Baru</FormLabel>
                 <FormControl>
                   <PasswordInput placeholder="******" {...field} />
                 </FormControl>
@@ -103,7 +103,7 @@ const ChangePasswordForm = () => {
           />
           <div className="flex items-center justify-end">
             <Button type="submit" disabled={isPending}>
-              Change Password
+              Simpan
             </Button>
           </div>
         </form>

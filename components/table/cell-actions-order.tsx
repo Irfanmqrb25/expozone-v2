@@ -29,23 +29,10 @@ const CellActionsOrder: React.FC<CellActionsProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/order/${data.id}`);
-      toast.success("Order has been deleted.");
+      toast.success("Pesanan telah di hapus.");
       router.refresh();
     } catch (error) {
-      toast.error("Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleupdateStatus = async (orderId: string, status: string) => {
-    setLoading(true);
-    try {
-      await axios.put(`/api/order/${orderId}`, { status });
-      toast.success("Status has been updated.");
-      router.refresh();
-    } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan.");
     } finally {
       setLoading(false);
     }
@@ -66,12 +53,12 @@ const CellActionsOrder: React.FC<CellActionsProps> = ({ data }) => {
             href={`/store/orders/${data.id}/details`}
           >
             <Rocket size={15} className="mr-1" />
-            Details
+            Detil
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onDelete} className="text-red-500">
           <Trash size={15} className="mr-1" />
-          Delete
+          Hapus
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

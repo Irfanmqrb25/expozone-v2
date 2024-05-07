@@ -13,22 +13,22 @@ const OrderTabs = () => {
 
   const tabs = [
     {
-      title: "All",
+      title: "Semua Pesanan",
       href: `/orders`,
       isActive: status === null,
     },
     {
-      title: "Pending",
+      title: "Tertunda",
       href: `/orders?status=PENDING`,
       isActive: status === "PENDING",
     },
     {
-      title: "Paid",
+      title: "Berhasil",
       href: `/orders?status=PAID`,
       isActive: status === "PAID",
     },
     {
-      title: "Canceled",
+      title: "Dibatalkan",
       href: `/orders?status=CANCELED`,
       isActive: status === "CANCELED",
     },

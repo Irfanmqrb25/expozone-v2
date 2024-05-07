@@ -2,7 +2,7 @@
 
 import { Separator } from "@/components/ui/separator";
 import clsx from "clsx";
-import { Package2, Store } from "lucide-react";
+import { Package2, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsQuestionCircle, BsStar } from "react-icons/bs";
@@ -30,8 +30,8 @@ const Menu = ({ params }: MenuProps) => {
               : "no-underline"
           )}
         >
-          <Store className="text-2xl md:hidden" />
-          <span className="hidden md:block">Featured</span>
+          <Sparkles className="w-6 h-6 md:hidden" />
+          <span className="hidden md:block">Unggulan</span>
         </Link>
         <Link
           href={`/visit/${params}/products`}
@@ -42,8 +42,8 @@ const Menu = ({ params }: MenuProps) => {
               : "no-underline"
           )}
         >
-          <Package2 className="text-2xl md:hidden" />
-          <span className="hidden md:block">Products</span>
+          <Package2 className="w-6 h-6 md:hidden" />
+          <span className="hidden md:block">Produk</span>
         </Link>
         <Link
           href={`/visit/${params}/review`}
@@ -54,8 +54,8 @@ const Menu = ({ params }: MenuProps) => {
               : "no-underline"
           )}
         >
-          <BsStar className="text-2xl md:hidden" />
-          <span className="hidden md:block">Review</span>
+          <BsStar className="w-6 h-6 md:hidden" />
+          <span className="hidden md:block">Ulasan</span>
         </Link>
         <Link
           href={`/visit/${params}/forum`}
@@ -66,7 +66,7 @@ const Menu = ({ params }: MenuProps) => {
               : "no-underline"
           )}
         >
-          <BsQuestionCircle className="text-2xl md:hidden" />
+          <BsQuestionCircle className="w-6 h-6 md:hidden" />
           <span className="hidden md:block">Forum</span>
         </Link>
       </div>

@@ -96,12 +96,19 @@ body,
   box-shadow: 7px 7px #fce700, 14px 14px #aa77ff;
 }
 
-.shadow-card:hover {
-  box-shadow: 7px 7px;
-  transition: 0.4s all;
+.shadow-custom:hover {
+  box-shadow: 10px 10px 0px -1px rgba(0, 0, 0, 1);
+}
+
+.shadow-custom {
+  box-shadow: 3px 3px rgba(0, 0, 0, 1);
+}
+
+.shadow-search {
+  box-shadow: 3px 3px rgba(0, 0, 0, 1);
 }
 
 .my-shadow {
-  box-shadow: 7px 7px;
+  box-shadow: 7px 7px black;
   transition: 0.4s all;
 }

@@ -81,11 +81,11 @@ const FileUpload = ({
           }}
           content={{
             button({ ready }) {
-              if (ready) return "Choose an Image(s)";
-              return "Getting ready...";
+              if (ready) return "Pilih Gambar";
+              return "Bersiap-siap...";
             },
             allowedContent({ uploadProgress, isUploading }) {
-              if (isUploading) return `Uploading ${uploadProgress}%`;
+              if (isUploading) return `Mengunggah ${uploadProgress}%`;
               return "";
             },
           }}
@@ -94,7 +94,7 @@ const FileUpload = ({
             onChange(urls);
           }}
           onUploadError={(error) => {
-            toast.error(error.message);
+            toast.error("Gagal mengunggah");
           }}
         />
       )}
@@ -130,7 +130,7 @@ const FileUpload = ({
               console.log(res);
             }}
             onUploadError={(error) => {
-              toast.error(error.message);
+              toast.error("Gagal mengunggah");
             }}
           />
         )

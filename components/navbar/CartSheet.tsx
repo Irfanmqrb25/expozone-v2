@@ -41,7 +41,7 @@ const CartSheet = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="flex items-center px-4 py-2 bg-white rounded-full">
+      <SheetTrigger className="flex items-center px-4 bg-white rounded-full h-9">
         <ShoppingCart size={20} color="black" />
         <span className="ml-2 text-sm font-medium text-black">
           {cart.items.length}
@@ -49,7 +49,7 @@ const CartSheet = () => {
       </SheetTrigger>
       <SheetContent className="flex flex-col w-full sm:max-w-lg">
         <SheetHeader>
-          <SheetTitle>Your Cart</SheetTitle>
+          <SheetTitle>Keranjang</SheetTitle>
         </SheetHeader>
         <Separator />
         {cart.items.length > 0 ? (
@@ -59,7 +59,7 @@ const CartSheet = () => {
               onClick={() => cart.removeAll()}
             >
               <Trash size={14} />
-              Remove all items ({cart.items.length})
+              Hapus semua ({cart.items.length})
             </button>
             <div className="flex flex-col flex-1 gap-5 overflow-hidden">
               <ScrollArea className="h-full">
@@ -125,7 +125,7 @@ const CartSheet = () => {
           <div className="flex flex-col items-center justify-center h-full gap-3">
             <ShoppingCart size={60} className="text-muted-foreground" />
             <div className="text-lg text-center md:text-xl text-muted-foreground">
-              Your cart is empty
+              Tidak ada item di keranjang
             </div>
           </div>
         )}

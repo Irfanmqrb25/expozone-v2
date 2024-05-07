@@ -15,10 +15,12 @@ const ProductsPage = async ({ searchParams }: HomePageProps) => {
   const products = await getProducts(searchParams);
   const session = await getCurrentUser();
 
+  console.log(searchParams);
+
   if (products?.length === 0) {
     return (
       <EmptyMessage
-        title="Products Not Found"
+        title="Produk Tidak Ditemukan"
         description="It seems that there are no products in this category yet"
         icon={PackageOpen}
       />

@@ -15,7 +15,9 @@ const OrderList = ({ orders }: OrderListProps) => {
         orders.map((order) => <OrderItem key={order.id} order={order} />)
       ) : (
         <div className="min-h-[200px]">
-          <h2 className="text-xl font-semibold text-center">No orders found</h2>
+          <h2 className="text-xl font-semibold text-center">
+            Tidak ada pemesanan
+          </h2>
         </div>
       )}
     </div>

@@ -71,9 +71,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
     try {
       await axios.put(`/api/store`, data);
       router.refresh();
-      toast.success("Store has been updated.");
+      toast.success("Profil toko berhasil diperbarui.");
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan.");
     }
   };
 
@@ -82,9 +82,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
     try {
       await axios.delete("/api/store");
       router.refresh();
-      toast.success("Store has been deleted.");
+      toast.success("Toko anda telah di hapus.");
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan");
     } finally {
       setLoadingDelete(false);
     }
@@ -93,8 +93,10 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
   return (
     <Card className="w-full border-2 border-black my-shadow bg-slate-100">
       <CardHeader className="space-y-1">
-        <CardTitle className="font-medium">Update your store</CardTitle>
-        <CardDescription>Edit your store data or delete it</CardDescription>
+        <CardTitle className="font-medium">Edit Toko</CardTitle>
+        <CardDescription>
+          Anda dapat mengedit dan menghapus toko.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -118,9 +120,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
               name="name"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nama Toko</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your store name" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,7 +135,7 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
                 <FormItem className="space-y-2">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your store email" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -145,12 +147,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
                 name="country"
                 render={({ field }) => (
                   <FormItem className="w-full space-y-2">
-                    <FormLabel>Country</FormLabel>
+                    <FormLabel>Negara</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter your store country"
-                        {...field}
-                      />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -161,9 +160,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
                 name="city"
                 render={({ field }) => (
                   <FormItem className="w-full space-y-2">
-                    <FormLabel>City</FormLabel>
+                    <FormLabel>Kota</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your store city" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -175,9 +174,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
               name="address"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>Alamat</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your store address" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,9 +187,9 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
               name="description"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Deskripsi</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Explain your store..." {...field} />
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -204,37 +203,37 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
                 </Button>
               ) : (
                 <Button type="submit" className="w-full">
-                  Update
+                  Simpan
                 </Button>
               )}
               <AlertDialog>
                 <AlertDialogTrigger asChild className="w-full">
                   <Button variant="destructive" disabled={isLoading}>
-                    Delete
+                    Hapus
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>
-                      Are you absolutely sure you want to delete the store?
+                      Apakah anda yakin ingin menghapus toko ini?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      This will permanently delete your store account and remove
-                      your data from our servers.
+                      Ini akan menghapus akun toko anda secara permanen dan
+                      menghapus semua datanya dari server kami.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel disabled={isLoading}>
-                      Cancel
+                      Batal
                     </AlertDialogCancel>
                     {loadingDelete ? (
                       <AlertDialogAction disabled={isLoading}>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Please wait
+                        Tunngu ...
                       </AlertDialogAction>
                     ) : (
                       <AlertDialogAction onClick={handleDeleteStore}>
-                        Continue
+                        Hapus
                       </AlertDialogAction>
                     )}
                   </AlertDialogFooter>

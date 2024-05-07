@@ -2,28 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
-  CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "../ui/button";
 import FavoriteButton from "../FavoriteButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
-import axios from "axios";
-import { toast } from "sonner";
 import useCart from "@/hooks/useCart";
+import { rupiahFormat } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import { ExtendedSession } from "@/next-auth";
 import { Product, Store } from "@prisma/client";
-import { rupiahFormat } from "@/lib/utils";
 
 interface ProductCard {
   productData: Product & {
@@ -39,7 +34,7 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
 
   const storeUrl =
     productData.store.name.split(" ").length > 1
-      ? productData.store.name.toLocaleLowerCase().replace(/\s+/g, "-")
+      ? productData.store.name.replace(/\s+/g, "-")
       : productData.store.name;
 
   const handleAddToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -48,11 +43,11 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
   };
 
   return (
-    <Card className="w-full md:max-w-[300px] overflow-hidden border-2 border-black shadow-card">
+    <Card className="w-full md:max-w-[300px] overflow-hidden transition-all hover:-translate-x-1 hover:-translate-y-1 border-black border shadow-custom">
       <Link href={`/${storeUrl}/${productData.id}`}>
         <Image
           alt="Product Image"
-          className="object-cover border-b-2 border-black w-full h-[270px] md:h-[210px]"
+          className="object-cover border-b border-black w-full h-[270px] md:h-[210px]"
           height={500}
           width={500}
           src={productData.images[0]}
@@ -62,7 +57,8 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
         <Link href={`/visit/${storeUrl}`} className="flex items-center gap-2">
           <Avatar className="w-6 h-6">
             <AvatarImage
-              alt="Shop Image"
+              alt="Product Image"
+              loading="lazy"
               src={productData.store.image || "/blank-user.jpg"}
             />
           </Avatar>
@@ -70,14 +66,16 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
             {productData.store.name}
           </p>
         </Link>
-        <CardTitle className="text-lg font-medium">
-          {productData.name}
-        </CardTitle>
-        <p className="font-light text-gray-500 line-clamp-2">
-          {productData.description}
-        </p>
+        <div>
+          <CardTitle className="text-lg font-medium line-clamp-1">
+            {productData.name}
+          </CardTitle>
+          <CardDescription className="font-light text-gray-500 line-clamp-1">
+            {productData.description}
+          </CardDescription>
+        </div>
         <div className="flex items-center justify-between">
-          <p className="text-sm font-medium line-clamp-1">
+          <p className="font-medium line-clamp-1">
             {rupiahFormat(Number(productData.price))}
           </p>
           <button
@@ -86,7 +84,7 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
             className="flex items-center gap-1 text-sm font-medium text-black/70 hover:text-black"
           >
             <ShoppingCart size={14} />
-            Add to Cart
+            Keranjang
           </button>
         </div>
       </CardContent>

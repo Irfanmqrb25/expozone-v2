@@ -12,10 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import clsx from "clsx";
 import qs from "query-string";
-import { categories } from "@/lib/data";
 import { FilterIcon } from "lucide-react";
+import { discoverCategories } from "@/app/discover/page";
 
 const Filter = () => {
   const router = useRouter();
@@ -59,10 +58,10 @@ const Filter = () => {
             {params?.get("category") ? params?.get("category") : "Filter"}
           </span>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-48" side="bottom" align="start">
+        <DropdownMenuContent className="w-fit" side="bottom" align="start">
           <DropdownMenuLabel>Filter Product</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {categories.map((category, i) => (
+          {discoverCategories.map((category, i) => (
             <DropdownMenuCheckboxItem
               key={i}
               checked={params?.get("category") === category.label}

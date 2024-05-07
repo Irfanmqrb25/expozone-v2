@@ -16,12 +16,12 @@ import bcrypt from "bcryptjs";
 export const editProfile = async (data: z.infer<typeof EditProfileSchema>) => {
   const user = await getCurrentUser();
   if (!user) {
-    return { error: "Unauthorized" };
+    return { error: "" };
   }
 
   const dbUser = await getUserById(user.id);
   if (!dbUser) {
-    return { error: "Unauthorized" };
+    return { error: "Tidak diizinkan!" };
   }
 
   if (user.isOAuth) {
@@ -33,7 +33,7 @@ export const editProfile = async (data: z.infer<typeof EditProfileSchema>) => {
     const existingUser = await getUserByEmail(data.email);
 
     if (existingUser && existingUser.id !== user.id) {
-      return { error: "Email already in use!" };
+      return { error: "Email telah digunakan!" };
     }
 
     const verificationToken = await generateVerificationToken(
@@ -45,7 +45,7 @@ export const editProfile = async (data: z.infer<typeof EditProfileSchema>) => {
       verificationToken.token
     );
 
-    return { success: "Verification email sent!" };
+    return { success: "Verifikasi email telah dikirim" };
   }
 
   const updatedUser = await db.user.update({
@@ -65,7 +65,7 @@ export const editProfile = async (data: z.infer<typeof EditProfileSchema>) => {
   });
 
   return {
-    success: "Profile updated!",
+    success: "Profil berhasil diperbarui!",
   };
 };
 
@@ -75,13 +75,13 @@ export const changePassword = async (
   const user = await getCurrentUser();
   if (!user) {
     return {
-      error: "Unauthorized",
+      error: "Tidak diizinkan!",
     };
   }
 
   const dbUser = await getUserById(user.id);
   if (!dbUser) {
-    return { error: "Unauthorized" };
+    return { error: "Tidak diizinkan!" };
   }
 
   if (user.isOAuth) {
@@ -94,7 +94,7 @@ export const changePassword = async (
     const passwordsMatch = await bcrypt.compare(data.password, dbUser.password);
 
     if (!passwordsMatch) {
-      return { error: "Incorrect password!" };
+      return { error: "Password yang anda masukkan salah!" };
     }
 
     const hashedPassword = await bcrypt.hash(data.newPassword, 10);
@@ -111,6 +111,6 @@ export const changePassword = async (
   });
 
   return {
-    success: "Password changed!",
+    success: "Password anda telah diperbarui!",
   };
 };

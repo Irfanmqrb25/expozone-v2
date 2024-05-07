@@ -6,6 +6,7 @@ import Footer from "@/components/navbar/Footer";
 
 import "swiper/css";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 
 export const dynamic = "force-dynamic";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <NextTopLoader color="#fdf0d5" showSpinner={false} />
         <Toaster richColors />
         <div>
           {children}

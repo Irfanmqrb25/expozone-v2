@@ -42,16 +42,16 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
       // @ts-expect-error
       window.snap.pay(order.token, {
         onSuccess: () => {
-          toast.success("Payment success!");
+          toast.success("Pembayaran berhasil!");
         },
         onPending: () => {
-          toast.info("Waiting your payment..");
+          toast.info("Menunggu pembayaran...");
         },
         onError: () => {
-          toast.error("Payment failed, something went wrong");
+          toast.error("Pembayaran gagal, terjadi kesalahan!");
         },
         onClose: () => {
-          toast.error("You have not completed the payment.");
+          toast.info("Kamu belum menyelesaikan pembayaran.");
         },
       });
     }
@@ -66,13 +66,13 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
         },
       });
       router.push("/orders?status=CANCELED");
-      toast.success("Order has been canceled.");
+      toast.success("Pesanan dibatalkan.");
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {
         return toast.error(error.response?.data);
       }
-      toast.error("Something went wrong");
+      toast.error("Terjadi kesalahan.");
     } finally {
       setIsLoading(false);
       setOpen(false);
@@ -114,19 +114,19 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
       <div className="flex items-center justify-between">
         <h3 className="flex items-center">
           <ShoppingBag className="w-4 h-4 mr-2" aria-hidden="true" />
-          <span>Order</span>
+          <span>Pesanan</span>
         </h3>
         {order.status === "PENDING" ? (
           <Badge variant="pending" className="capitalize">
-            Pending
+            Tertunda
           </Badge>
         ) : order.status === "PAID" ? (
           <Badge variant="success" className="capitalize">
-            Success
+            Berhasil
           </Badge>
         ) : (
           <Badge variant="destructive" className="capitalize">
-            Canceled
+            Dibatalkan
           </Badge>
         )}
       </div>
@@ -170,7 +170,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
             <OrderItemSkeleton />
           )}
           <div className="flex items-center justify-between py-3">
-            <p className="mr-2 font-bold sm:text-xl">Total :</p>
+            <p className="mr-2 font-bold sm:text-xl">Total Harga :</p>
             <p className="font-bold text-right">
               {rupiahFormat(Number(order.totalPrice))}
             </p>
@@ -190,7 +190,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
                     className="flex items-center gap-1 min-w-[100px]"
                   >
                     <Ban size={17} />
-                    Cancel
+                    Batalkan
                   </Button>
                   <Button
                     size="sm"
@@ -199,7 +199,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
                     disabled={isLoading}
                   >
                     <CreditCard size={17} />
-                    Pay
+                    Bayar
                   </Button>
                 </div>
               )}
@@ -214,7 +214,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
                     )}
                   >
                     <View size={17} />
-                    Details
+                    Detil
                   </Link>
                   <Link
                     href={`/store`}
@@ -225,7 +225,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
                     )}
                   >
                     <Star size={17} />
-                    Review
+                    Ulas
                   </Link>
                 </div>
               )}

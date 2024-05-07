@@ -29,8 +29,8 @@ const DataTableHeader = ({
         <Input
           placeholder={
             pathname === "/store/products"
-              ? "Search names..."
-              : "Search products..."
+              ? "Cari nama produk..."
+              : "Cari nama produk..."
           }
           value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
@@ -52,12 +52,12 @@ const DataTableHeader = ({
           variant="destructive"
         >
           <Trash size={16} className="mr-1" />
-          Delete
+          Hapus
         </Button>
       ) : pathname === "/store/products" && store ? (
         <Button size="sm" onClick={() => router.push("/store/products/new")}>
           <PlusCircle size={16} className="mr-1" />
-          Add Product
+          Tambah Produk
         </Button>
       ) : null}
     </div>

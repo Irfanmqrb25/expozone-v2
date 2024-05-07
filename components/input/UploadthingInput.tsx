@@ -62,12 +62,12 @@ const UploadthingInput: React.FC<UploadthingInputProps> = ({
           }}
           content={{
             button({ ready }) {
-              if (ready) return "Change Avatar";
+              if (ready) return "Ubah Gambar";
 
-              return "Getting ready...";
+              return "Bersiap-siap...";
             },
             allowedContent({ uploadProgress, isUploading }) {
-              if (isUploading) return `Uploading ${uploadProgress}%`;
+              if (isUploading) return `Mengunggah ${uploadProgress}%`;
               return "";
             },
           }}
@@ -76,7 +76,7 @@ const UploadthingInput: React.FC<UploadthingInputProps> = ({
             onChange(res?.[0].url);
           }}
           onUploadError={(error: Error) => {
-            console.log(error);
+            console.log("Gagal mengunggah gambar");
           }}
         />
       </div>

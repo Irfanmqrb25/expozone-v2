@@ -69,17 +69,16 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
   });
 
   const productAssetWatch = form.watch("productAssets");
-  console.log(productAssetWatch.length);
 
   const onUpdate = async (data: z.infer<typeof ProductSchema>) => {
     try {
       await axios.patch(`/api/product/${params.productId}`, data);
       router.refresh();
       router.push("/store/products");
-      toast.success("Produk has been updated.");
+      toast.success("Data produk telah diperbarui.");
       form.reset();
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Terjadi kesalahan.");
     }
   };
 
@@ -92,9 +91,9 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
           render={({ field }) => (
             <FormItem>
               <div>
-                <FormLabel>Image</FormLabel>
+                <FormLabel>Gambar Produk</FormLabel>
                 <p className="text-sm text-muted-foreground">
-                  maximum of 3 images allowed
+                  makasimal 3 gambar untuk diunggah.
                 </p>
               </div>
               <FormControl>
@@ -123,7 +122,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Nama Produk</FormLabel>
               <FormControl>
                 <Input placeholder="Product Name" {...field} />
               </FormControl>
@@ -136,11 +135,11 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Category</FormLabel>
+              <FormLabel>Kategori Produk</FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select product category" />
+                    <SelectValue placeholder="Pilih Kategori Produk" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -160,7 +159,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Price</FormLabel>
+              <FormLabel>Harga Produk</FormLabel>
               <FormControl>
                 <CurrencyInput
                   prefix="Rp. "
@@ -182,7 +181,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Deskripsi Produk</FormLabel>
               <FormControl>
                 <Textarea placeholder="Product description" {...field} />
               </FormControl>
@@ -202,14 +201,14 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
                 />
               </FormControl>
               <FormLabel className="text-sm font-normal">
-                Check if you want this product to be featured in your store.
+                Ceklis untuk memfiturkan produk ini pada toko anda.
               </FormLabel>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="space-y-2">
-          <FormLabel>Asset</FormLabel>
+          <FormLabel>Aset Produk</FormLabel>
           <div className="flex items-center gap-4">
             <Button
               size="sm"
@@ -226,7 +225,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
               }}
             >
               <HiLink className="w-4 h-4" />
-              Upload File With Link
+              Unggah Menggunakan External Link
             </Button>
             <span>or</span>
             <Button
@@ -244,7 +243,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
               }}
             >
               <HiComputerDesktop className="w-4 h-4" />
-              Upload File From Computer
+              Unggah File Dari Komputer
             </Button>
           </div>
           {uploadWithLink && (
@@ -258,7 +257,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
                     <FormControl>
                       <Input
                         type="url"
-                        placeholder="type your url asset here..."
+                        placeholder="masukkan link penyimpanan aset anda..."
                         className="pl-8"
                         value={field.value as any}
                         onChange={field.onChange}
@@ -298,7 +297,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
           )}
         </div>
         <Button type="submit" className="w-full">
-          Submit
+          Simpan
         </Button>
       </form>
     </Form>
