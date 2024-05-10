@@ -14,7 +14,7 @@ import {
 
 import qs from "query-string";
 import { FilterIcon } from "lucide-react";
-import { discoverCategories } from "@/app/discover/page";
+import { productCategories } from "@/lib/data";
 
 const Filter = () => {
   const router = useRouter();
@@ -61,13 +61,13 @@ const Filter = () => {
         <DropdownMenuContent className="w-fit" side="bottom" align="start">
           <DropdownMenuLabel>Filter Product</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {discoverCategories.map((category, i) => (
+          {productCategories.map((category, i) => (
             <DropdownMenuCheckboxItem
               key={i}
-              checked={params?.get("category") === category.label}
-              onCheckedChange={() => handleSelected(category.label)}
+              checked={params?.get("category") === category}
+              onCheckedChange={() => handleSelected(category)}
             >
-              {category.label}
+              {category}
             </DropdownMenuCheckboxItem>
           ))}
         </DropdownMenuContent>
