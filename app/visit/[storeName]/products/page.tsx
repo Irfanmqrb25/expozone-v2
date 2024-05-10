@@ -18,6 +18,8 @@ const ProducStorePage = async ({ params }: { params: IStoreParams }) => {
 
   const store = await getStorebyName({ storeName: storeUrl });
 
+  console.log(store.products);
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-2">

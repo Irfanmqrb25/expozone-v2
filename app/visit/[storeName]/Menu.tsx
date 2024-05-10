@@ -57,18 +57,6 @@ const Menu = ({ params }: MenuProps) => {
           <BsStar className="w-6 h-6 md:hidden" />
           <span className="hidden md:block">Ulasan</span>
         </Link>
-        <Link
-          href={`/visit/${params}/forum`}
-          className={clsx(
-            "cursor-pointer flex items-center w-full justify-center pb-1",
-            pathname === `/visit/${params}/forum`
-              ? "border-b-2 border-black gap-1 text-black"
-              : "no-underline"
-          )}
-        >
-          <BsQuestionCircle className="w-6 h-6 md:hidden" />
-          <span className="hidden md:block">Forum</span>
-        </Link>
       </div>
       <Separator className="mb-5 h-[1.5px] " />
     </div>

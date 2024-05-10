@@ -1,8 +1,7 @@
 "use client";
 
-import { Order } from "@prisma/client";
-import React from "react";
 import OrderItem from "./OrderItem";
+import { Order } from "@prisma/client";
 
 interface OrderListProps {
   orders: Order[];

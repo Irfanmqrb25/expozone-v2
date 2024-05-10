@@ -44,15 +44,20 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
 
   return (
     <Card className="w-full md:max-w-[300px] overflow-hidden transition-all hover:-translate-x-1 hover:-translate-y-1 border-black border shadow-custom">
-      <Link href={`/${storeUrl}/${productData.id}`}>
-        <Image
-          alt="Product Image"
-          className="object-cover border-b border-black w-full h-[270px] md:h-[210px]"
-          height={500}
-          width={500}
-          src={productData.images[0]}
-        />
-      </Link>
+      <div className="relative">
+        <Link href={`/${storeUrl}/${productData.id}`}>
+          <Image
+            alt="Product Image"
+            className="object-cover border-b border-black w-full h-[270px] md:h-[210px]"
+            height={500}
+            width={500}
+            src={productData.images[0]}
+          />
+        </Link>
+        <div className="absolute z-50 p-1 bg-white rounded-sm top-2 right-2">
+          <FavoriteButton productId={productData.id} session={session} />
+        </div>
+      </div>
       <CardContent className="py-4 space-y-2">
         <Link href={`/visit/${storeUrl}`} className="flex items-center gap-2">
           <Avatar className="w-6 h-6">

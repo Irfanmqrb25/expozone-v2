@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler, useEffect, useState } from "react";
 
@@ -12,19 +11,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-
-import axios, { AxiosError } from "axios";
-import { toast } from "sonner";
-import { Rupiah } from "@jetmiky/rupiahjs";
-import { BsArrowUpRight } from "react-icons/bs";
-import { Product, ProductAsset, Store } from "@prisma/client";
 import AssetCard from "@/components/card/AssetCard";
+import { Separator } from "@/components/ui/separator";
+import FavoriteButton from "@/components/FavoriteButton";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ProductImageCarousel } from "@/components/ProductImageCarousel";
-import { ExtendedSession } from "@/next-auth";
+
+import { toast } from "sonner";
+import { format } from "date-fns";
 import useCart from "@/hooks/useCart";
 import { Loader2 } from "lucide-react";
+import { ProductReview } from "@/types";
+import axios, { AxiosError } from "axios";
+import { Rupiah } from "@jetmiky/rupiahjs";
+import { ExtendedSession } from "@/next-auth";
+import { BsArrowUpRight } from "react-icons/bs";
+import { BiMessageSquareDots } from "react-icons/bi";
+import { Product, ProductAsset, Review, Store } from "@prisma/client";
 
 interface DetailProductPageClientProps {
   product: Product & {
@@ -32,11 +35,13 @@ interface DetailProductPageClientProps {
     productAssets: ProductAsset[];
   };
   session: ExtendedSession;
+  reviews: ProductReview[];
 }
 
 const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
   product,
   session,
+  reviews,
 }) => {
   const cart = useCart();
   const router = useRouter();
@@ -113,7 +118,7 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
   }, []);
 
   return (
-    <div className="container px-0">
+    <div className="container px-0 space-y-12">
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
         <ProductImageCarousel
           className="w-full md:w-1/2"
@@ -123,7 +128,7 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
           }}
         />
         <div className="flex flex-col w-full gap-4 md:w-1/2">
-          <Link href={`/store/${storeUrl}`} className="hover:bg-gray-100">
+          <Link href={`/visit/${storeUrl}`} className="hover:bg-gray-100">
             <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-00">
               <div className="flex items-center gap-2">
                 <Avatar className="border border-gray-300 w-9 h-9">
@@ -144,22 +149,25 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
           </Link>
           <p className="text-3xl font-medium">{product?.name}</p>
           <p className="text-gray-400">{price.getCurrency("Rp", "dot")}</p>
-          <div className="flex items-center gap-2">
-            <Button
-              className="flex items-center h-8 gap-2 text-xs"
-              disabled={loading}
-              onClick={() => handleCheckOut()}
-            >
-              {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-              Beli sekarang
-            </Button>
-            <Button
-              variant="outline"
-              className="h-8 text-xs"
-              onClick={handleAddToCart}
-            >
-              Tambah ke keranjang
-            </Button>
+          <div className="flex flex-row items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Button
+                className="flex items-center h-8 gap-2 text-xs"
+                disabled={loading}
+                onClick={() => handleCheckOut()}
+              >
+                {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                Beli sekarang
+              </Button>
+              <Button
+                variant="outline"
+                className="h-8 text-xs"
+                onClick={handleAddToCart}
+              >
+                Tambah ke keranjang
+              </Button>
+            </div>
+            <FavoriteButton productId={product.id} session={session} />
           </div>
           <Separator />
           <Accordion
@@ -181,6 +189,32 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
               ))}
             </div>
           </div>
+        </div>
+      </div>
+      <div className="space-y-4">
+        <div className="flex items-center gap-1">
+          <BiMessageSquareDots className="w-5 h-5 lg:w-7 lg:h-7" />
+          <h5 className="text-lg font-semibold md:text-xl lg:text-2xl">
+            Ulasan Produk
+          </h5>
+        </div>
+        <div className="flex flex-col gap-2">
+          {reviews.map((review) => (
+            <div className="py-4 space-y-2 border-b" key={review.id}>
+              <div className="flex items-center gap-2">
+                <Avatar className="w-9 h-9">
+                  <AvatarImage src={review.user.image || "/blank-user.jpg"} />
+                </Avatar>
+                <div>
+                  <p className="font-medium">{review.user.name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {format(new Date(review.createdAt), "dd/MM/yyyy")}
+                  </p>
+                </div>
+              </div>
+              <p>{review.message}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

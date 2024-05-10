@@ -22,7 +22,7 @@ const useFavorite = ({ productId, session }: IUseFavorite) => {
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       if (!session) {
-        return router.push("/login");
+        return router.push("/auth/sign-in");
       }
 
       let request;

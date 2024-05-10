@@ -21,9 +21,9 @@ export default async function Layout({
       <CreateStoreModal />
       <MainNav session={session} store={store!} />
       <Container>
-        <div className="h-full pt-16">
+        <div className="h-full">
           {store && (
-            <div className="mb-5 space-y-3">
+            <div className="pt-16 mb-5 space-y-3">
               <div>
                 <div className="flex items-center gap-2">
                   <Store size={26} />

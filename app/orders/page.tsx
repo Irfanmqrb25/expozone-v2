@@ -3,6 +3,7 @@ import { db } from "@/lib/prisma";
 import { getCurrentUser } from "@/data/get-user";
 import OrderList from "@/components/order/OrderList";
 import OrderTabs from "@/components/tabs/OrderTabs";
+import { ShoppingBag } from "lucide-react";
 
 const OrderPage = async ({
   searchParams,
@@ -41,7 +42,12 @@ const OrderPage = async ({
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-3xl font-medium">Pesanan Saya</p>
+        <div className="flex items-center gap-2">
+          <ShoppingBag size={24} />
+          <h1 className="text-xl font-bold tracking-tight text-transparent md:text-2xl lg:text-3xl bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text">
+            Riwayat Pemesanan
+          </h1>
+        </div>
         <p className="text-muted-foreground">
           Lihat semua riwayat pemesanan anda
         </p>

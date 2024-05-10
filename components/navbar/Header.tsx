@@ -121,20 +121,17 @@ const Header: React.FC<HeaderProps> = ({ session }) => {
                 isScrolled ? "space-x-16" : "space-x-24"
               )}
             >
-              <Link href="/" className="underline underline-offset-4">
-                HOME
-              </Link>
               <Link href="/featured">FEATURED</Link>
               <Link href="/products">PRODUCTS</Link>
-              <p className="hover:cursor-not-allowed">NEW ARRIVALS</p>
-              <p className="hover:cursor-not-allowed">BLOG</p>
+              <Link href="/discover/search?st=new-arrival">NEW ARRIVALS</Link>
+              <Link href={session ? "/store" : "/auth/sign-in"}>STORE</Link>
             </ul>
             {isScrolled && (
               <Link
-                href={session ? "/featured" : "/login"}
+                href={session ? "/featured" : "/auth/sign-in"}
                 className="border border-black px-6 py-2 hover:bg-[#23A094] hover:text-white tracking-wider"
               >
-                {session ? "NEXT" : "LOGIN"}
+                {session ? "NEXT" : "SIGN IN"}
               </Link>
             )}
           </div>
@@ -185,18 +182,11 @@ const Header: React.FC<HeaderProps> = ({ session }) => {
           {isOpen && (
             <>
               <Link
-                href="/login"
+                href="/auth/sign-in"
                 className="flex items-center gap-4 p-3 hover:text-[#23A094]"
               >
                 <AiOutlineUser />
-                <span>Login</span>
-              </Link>
-              <Link
-                href="/"
-                className="flex items-center gap-4 p-3  hover:text-[#23A094]"
-              >
-                <AiOutlineHome />
-                <span>Home</span>
+                <span>Sign In</span>
               </Link>
               <Link
                 href="/featured"
@@ -212,14 +202,20 @@ const Header: React.FC<HeaderProps> = ({ session }) => {
                 <IoCubeOutline />
                 <span>Products</span>
               </Link>
-              <li className="flex items-center gap-4 p-3  hover:text-[#23A094]">
+              <Link
+                href="/discover/search?st=new-arrival"
+                className="flex items-center gap-4 p-3  hover:text-[#23A094]"
+              >
                 <MdOutlineSell />
                 <span>New Arrivals</span>
-              </li>
-              <li className="flex items-center gap-4 p-3 hover:text-[#23A094]">
+              </Link>
+              <Link
+                href={session ? "/store" : "/auth/sign-in"}
+                className="flex items-center gap-4 p-3 hover:text-[#23A094]"
+              >
                 <BiNews />
-                <span>Blogs</span>
-              </li>
+                <span>Store</span>
+              </Link>
             </>
           )}
         </ul>

@@ -25,6 +25,6 @@ export default async function getProducts(params: IProductParams) {
 
     return products;
   } catch (error) {
-    console.log(error);
+    return [];
   }
 }

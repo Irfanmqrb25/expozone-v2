@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Badge } from "../ui/badge";
@@ -9,14 +10,13 @@ import { Separator } from "../ui/separator";
 import { Button, buttonVariants } from "../ui/button";
 import OrderItemSkeleton from "../skeleton/OrderItemSkeleton";
 
-import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
+import axios, { AxiosError } from "axios";
 import { GetOrderItems } from "@/types";
 import type { Order } from "@prisma/client";
 import { cn, rupiahFormat } from "@/lib/utils";
 import { getOrderItems } from "@/data/get-order";
 import { Ban, CreditCard, ShoppingBag, Star, View } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface OrderItemProps {
   order: Order;
@@ -75,7 +75,6 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
       toast.error("Terjadi kesalahan.");
     } finally {
       setIsLoading(false);
-      setOpen(false);
     }
   };
 
@@ -204,28 +203,17 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
                 </div>
               )}
               {order.status === "PAID" && (
-                <div className="flex justify-end gap-3">
+                <div className="flex justify-end">
                   <Link
                     href={`/orders/${order.id}`}
-                    aria-disabled={isLoading}
-                    className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "flex items-center gap-1 min-w-[100px]"
-                    )}
-                  >
-                    <View size={17} />
-                    Detil
-                  </Link>
-                  <Link
-                    href={`/store`}
                     aria-disabled={isLoading}
                     className={cn(
                       buttonVariants({ variant: "default" }),
                       "flex items-center gap-1 min-w-[100px]"
                     )}
                   >
-                    <Star size={17} />
-                    Ulas
+                    <View size={17} />
+                    Detail
                   </Link>
                 </div>
               )}
