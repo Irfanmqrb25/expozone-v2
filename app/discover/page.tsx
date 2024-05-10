@@ -10,7 +10,7 @@ import {
 import { HiOutlineCodeBracket } from "react-icons/hi2";
 import { FiBookOpen } from "react-icons/fi";
 
-export const DiscoverPage = () => {
+export default function DiscoverPage() {
   const discoverCategories = [
     {
       href: "/discover/search?st=font dan tipografi",
@@ -89,6 +89,4 @@ export const DiscoverPage = () => {
       </div>
     </div>
   );
-};
-
-export default DiscoverPage;
+}
