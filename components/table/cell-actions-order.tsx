@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -14,8 +13,8 @@ import {
 import { OrdersColumn } from "./OrderTable";
 
 import axios from "axios";
-import { MoreHorizontal, Rocket, Trash } from "lucide-react";
 import { toast } from "sonner";
+import { MoreHorizontal, Trash } from "lucide-react";
 
 interface CellActionsProps {
   data: OrdersColumn;
@@ -47,15 +46,6 @@ const CellActionsOrder: React.FC<CellActionsProps> = ({ data }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>
-          <Link
-            className="flex items-center"
-            href={`/store/orders/${data.id}/details`}
-          >
-            <Rocket size={15} className="mr-1" />
-            Detail
-          </Link>
-        </DropdownMenuItem>
         <DropdownMenuItem onClick={onDelete} className="text-red-500">
           <Trash size={15} className="mr-1" />
           Hapus
