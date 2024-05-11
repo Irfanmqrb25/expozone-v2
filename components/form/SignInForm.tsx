@@ -68,7 +68,10 @@ const SignInForm = () => {
       showSocialAuth
     >
       <Form {...form}>
-        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="h-full space-y-3"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <FormField
             control={form.control}
             name="email"

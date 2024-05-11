@@ -53,7 +53,7 @@ const CellActionsOrder: React.FC<CellActionsProps> = ({ data }) => {
             href={`/store/orders/${data.id}/details`}
           >
             <Rocket size={15} className="mr-1" />
-            Detil
+            Detail
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onDelete} className="text-red-500">

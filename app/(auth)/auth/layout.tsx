@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col w-full gap-10 py-7 md:px-40 md:py-10">
+    <div className="flex flex-col w-full min-h-screen gap-10 py-7 md:px-40 md:py-10">
       <Link
         href="/featured"
         className="flex items-center justify-start gap-2 px-6 xl:px-0"
@@ -11,6 +11,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         <Image
           src="/assets/brand-logo.svg"
           alt="brand logo"
+          loading="lazy"
           width={40}
           height={40}
           className="w-[30px] md:w-[40px]"

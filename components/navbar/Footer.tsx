@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="py-8 text-white bg-black">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
-          <div className="w-full lg:w-1/3">
+          <div className="w-full md:w-1/3">
             <h3 className="mb-4 text-lg font-semibold">Tentang Kami</h3>
             <p>
               Expozone platform e-commerce terkemuka yang menawarkan beragam

@@ -16,7 +16,7 @@ export default async function Layout({
     <div className="h-full">
       <MainNav session={session} store={store!} />
       <Container>
-        <div className="py-20">{children}</div>
+        <div className="h-full py-20">{children}</div>
       </Container>
     </div>
   );

@@ -3,7 +3,11 @@ import SearchPageClient from "./client";
 
 const SearchPage = async () => {
   const session = await getCurrentUser();
-  return <SearchPageClient session={session!} />;
+  return (
+    <div className="h-full">
+      <SearchPageClient session={session!} />
+    </div>
+  );
 };
 
 export default SearchPage;

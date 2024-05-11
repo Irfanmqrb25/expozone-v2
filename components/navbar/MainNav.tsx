@@ -57,7 +57,7 @@ const MainNav: React.FC<MainNavProps> = ({ session, store }) => {
           ) : (
             <Link
               href="/auth/sign-in"
-              className="px-4 py-1 border-2 border-white rounded-sm hover:bg-[#006E7F] hover:text-white"
+              className="px-4 py-1 border-2 border-white rounded-full hover:bg-[#006E7F] hover:text-white"
             >
               Sign in
             </Link>

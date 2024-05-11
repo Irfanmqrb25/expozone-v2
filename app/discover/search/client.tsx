@@ -53,7 +53,7 @@ const SearchPageClient = ({ session }: SearchPageProps) => {
 
   if (confirmedHasNoResults) {
     return (
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col min-h-screen gap-5">
         <div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2 text-2xl">
@@ -63,17 +63,19 @@ const SearchPageClient = ({ session }: SearchPageProps) => {
             <p className="text-muted-foreground">{`items matches (${results.length})`}</p>
           </div>
         </div>
-        <EmptyMessage
-          title="Products Not Found"
-          description={`There are no products with name ${query}`}
-          icon={PackageOpen}
-        />
+        <div className="mt-20">
+          <EmptyMessage
+            title="Products Not Found"
+            description={`There are no products with name ${query}`}
+            icon={PackageOpen}
+          />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col min-h-screen gap-5">
       {query === "new-arrival" && (
         <div>
           <h1 className="text-xl font-bold tracking-tight text-transparent md:text-2xl lg:text-3xl bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text">

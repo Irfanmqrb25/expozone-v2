@@ -53,7 +53,7 @@ const CellActionsProduct: React.FC<CellActionsProps> = ({ data }) => {
             href={`/store/products/${data.id}/detail`}
           >
             <Rocket size={15} className="mr-1" />
-            Detil
+            Detail
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
