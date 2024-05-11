@@ -49,18 +49,18 @@ const CheckoutSummary = () => {
       window.snap.pay(token, {
         onSuccess: () => {
           router.push("/orders");
-          toast.success("Payment success!");
+          toast.success("Pembayaran berhasil!");
         },
         onPending: () => {
           router.push("/orders");
-          toast("Waiting your payment..");
+          toast("Menunggu pembayaran...");
         },
         onError: () => {
-          toast.error("Payment failed, something went wrong");
+          toast.error("Pembayaran gagal, terjadi kesalahan!");
         },
         onClose: () => {
           router.push("/orders");
-          toast.error("You have not completed the payment.");
+          toast.error("Kamu belum menyelesaikan pembayaran.");
         },
       });
     }
