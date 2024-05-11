@@ -3,13 +3,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+import Image from "next/image";
+
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 import { toast } from "sonner";
-import { verifyEmail } from "@/actions/auth";
-import { PulseLoader } from "react-spinners";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { verifyEmail } from "@/actions/auth";
 
 const VerificationEmail = () => {
   const router = useRouter();
@@ -20,8 +20,8 @@ const VerificationEmail = () => {
 
   const onSubmit = useCallback(() => {
     if (!token) {
-      setError("Missing token");
-      return toast.error("Missing token!");
+      setError("Token tidak ditemukan!");
+      return toast.error("Token tidak ditemukan!");
     }
     verifyEmail(token).then((data) => {
       if (data?.error) {
@@ -30,7 +30,7 @@ const VerificationEmail = () => {
       }
       if (data.success) {
         setSuccess(data.success);
-        router.push("/featured");
+        router.push("/auth/sign-in");
         return toast.success(data.success);
       }
     });
@@ -44,7 +44,7 @@ const VerificationEmail = () => {
     <Card className="w-[450px] shadow-md dark:bg-[#0e1111]">
       <CardContent className="pt-6">
         <div className="flex flex-col items-center justify-center w-full space-y-4 h-[350px]">
-          <CardTitle>Verifying your email...</CardTitle>
+          <CardTitle>Memverifikasi Email</CardTitle>
           <Image
             src="/waiting-verification.webp"
             alt="logo"
@@ -53,10 +53,14 @@ const VerificationEmail = () => {
             className={cn(!success && !error && "animate-pulse")}
           />
           {success && (
-            <p className="font-medium text-green-500">Verification Success</p>
+            <p className="font-medium text-green-500">
+              Email berhasil di verifikasi
+            </p>
           )}
           {error && (
-            <p className="font-medium text-red-500">Verification Failed</p>
+            <p className="font-medium text-red-500">
+              Email gagal di verifikasi
+            </p>
           )}
         </div>
       </CardContent>

@@ -50,9 +50,9 @@ const SignUpForm = () => {
 
   return (
     <AuthCard
-      title="Sign up"
-      description="Create a new account!"
-      backButton="Already have an account? Sign In."
+      title="Daftar Sekarang"
+      description="Buat akun baru!"
+      backButton="Sudah memiliki akun? Masuk."
       backButtonLink="/auth/sign-in"
       showSocialAuth
     >
@@ -111,7 +111,7 @@ const SignUpForm = () => {
             )}
           />
           <Button type="submit" className="w-full" disabled={isPending}>
-            Sign up
+            Daftar
           </Button>
         </form>
       </Form>

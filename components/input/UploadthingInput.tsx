@@ -45,7 +45,7 @@ const UploadthingInput: React.FC<UploadthingInputProps> = ({
           <div className="relative w-24 h-24 overflow-hidden border border-dashed rounded-full">
             <Image
               fill
-              src="/blank-store.png"
+              src="/blank-user.jpg"
               alt="store image placeholder"
               className="object-cover"
             />
@@ -64,7 +64,7 @@ const UploadthingInput: React.FC<UploadthingInputProps> = ({
             button({ ready }) {
               if (ready) return "Ubah Gambar";
 
-              return "Bersiap-siap...";
+              return "loading...";
             },
             allowedContent({ uploadProgress, isUploading }) {
               if (isUploading) return `Mengunggah ${uploadProgress}%`;

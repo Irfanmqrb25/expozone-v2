@@ -44,7 +44,7 @@ const AuthCard = ({
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background dark:bg-[#0e1111] px-2 text-muted-foreground">
-                  Or continue with
+                  Atau masuk dengan
                 </span>
               </div>
             </div>

@@ -6,6 +6,7 @@ export const EditProfileSchema = z.object({
   email: z.optional(
     z.string().email({ message: "Please enter a valid email" })
   ),
+  isTwoFactorEnabled: z.optional(z.boolean()),
 });
 
 export const ChangePasswordSchema = z

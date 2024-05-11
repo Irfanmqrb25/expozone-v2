@@ -30,6 +30,7 @@ import { db } from "@/lib/prisma";
 import { AuthError } from "next-auth";
 import { getPasswordResetTokenByToken } from "@/data/auth/get-password";
 import { signIn as nextAuthSignIn } from "@/app/api/(lib)/auth/[...nextauth]/auth";
+import { getCurrentUser } from "@/data/get-user";
 
 export const signUp = async (data: z.infer<typeof SignUpSchema>) => {
   const validatedFields = SignUpSchema.safeParse(data);
@@ -167,10 +168,10 @@ export const signIn = async (
         },
       });
     } else {
-      // Jika tidak ada kode 2FA yang diberikan, kirim token 2FA ke email pengguna dan kembalikan informasi dua faktor
+      // Jika tidak ada kode 2FA yang diberikan, buat token 2FA
       const twoFactorToken = await generateTwoFactorToken(existingUser.email);
 
-      // Lalu Kirim email dua faktor
+      // Lalu Kirim Ke email
       await sendTwoFactorTokenEmail(existingUser.email, twoFactorToken.token);
 
       return {
@@ -206,14 +207,14 @@ export const verifyEmail = async (token: string) => {
   const existingToken = await getVerificationTokenByToken(token);
   if (!existingToken) {
     return {
-      error: "Token does not exist!",
+      error: "Token tidak ditemukan!",
     };
   }
 
   const hasExpired = new Date(existingToken.expires) < new Date();
   if (hasExpired) {
     return {
-      error: "Token has expired!",
+      error: "Token telah kedaluwarsa!",
     };
   }
 
@@ -222,7 +223,7 @@ export const verifyEmail = async (token: string) => {
   );
   if (!existingUser) {
     return {
-      error: "Email does not exist!",
+      error: "Email tidak ditemukan!",
     };
   }
 
@@ -257,7 +258,7 @@ export const verifyEmail = async (token: string) => {
   });
 
   return {
-    success: "Email verified successfully!",
+    success: "Email telah diverifikasi!",
   };
 };
 
@@ -268,7 +269,7 @@ export const resetPassword = async (
 
   if (!validatedFields.success) {
     return {
-      error: "Invalid email!",
+      error: "Email tidak valid!",
     };
   }
 
@@ -278,7 +279,7 @@ export const resetPassword = async (
 
   if (!existingUser) {
     return {
-      error: "email not found!",
+      error: "Email tidak ditemukan!",
     };
   }
 
@@ -286,7 +287,7 @@ export const resetPassword = async (
   await sendPasswordResetEmail(email, passwordResetToken.token);
 
   return {
-    success: "Email sent!",
+    success: "Email reset password telah dikirim!",
   };
 };
 
@@ -296,7 +297,7 @@ export const newPassword = async (
 ) => {
   if (!token) {
     return {
-      error: "Missing token!",
+      error: "Token tidak ditemukan!",
     };
   }
 
@@ -304,7 +305,7 @@ export const newPassword = async (
 
   if (!validatedFields.success) {
     return {
-      error: "Invalid fields!",
+      error: "Password yang valid!",
     };
   }
 
@@ -313,27 +314,27 @@ export const newPassword = async (
   const existingToken = await getPasswordResetTokenByToken(token);
   if (!existingToken) {
     return {
-      error: "Invalid token!",
+      error: "Token tidak ditemukan!",
     };
   }
 
   const hasExpired = new Date(existingToken.expires) < new Date();
   if (hasExpired) {
     return {
-      error: "Token has expired!",
+      error: "Token telah kedaluwarsa!",
     };
   }
 
   const existingUser = await getUserByEmail(existingToken.email);
   if (!existingUser) {
     return {
-      error: "Email does not exist!",
+      error: "Email tidak ditemukan!",
     };
   }
 
   if (newPassword !== confirmPassword) {
     return {
-      error: "Passwords do not match!",
+      error: "Password tidak cocok!",
     };
   }
 
@@ -355,6 +356,6 @@ export const newPassword = async (
   });
 
   return {
-    success: "Password reset successfully!",
+    success: "Password telah diperbarui!",
   };
 };

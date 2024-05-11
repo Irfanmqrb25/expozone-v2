@@ -5,6 +5,7 @@ import { useEffect, useTransition } from "react";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,6 +23,7 @@ import { ExtendedSession } from "@/next-auth";
 import { editProfile } from "@/actions/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileSchema } from "@/lib/validations/user";
+import { Switch } from "../ui/switch";
 
 interface EditProfileFormProps {
   user: ExtendedSession;
@@ -34,8 +36,9 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
     resolver: zodResolver(EditProfileSchema),
     defaultValues: {
       name: user.name || undefined,
-      image: user.image || "/blank-user.jpg",
+      image: user.image || undefined,
       email: user.email || undefined,
+      isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
     },
   });
 
@@ -110,6 +113,30 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
               </FormItem>
             )}
           />
+          {user.isOAuth === false && (
+            <FormField
+              control={form.control}
+              name="isTwoFactorEnabled"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between p-3 border rounded-lg shadow-sm">
+                  <div className="space-y-0.5">
+                    <FormLabel>Verifikasi Dua Langkah</FormLabel>
+                    <FormDescription>
+                      Aktifkan fitur verifikasi dua langkah untuk keamanan akun
+                      anda
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      disabled={isPending}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          )}
           <div className="flex items-center justify-end">
             <Button type="submit" disabled={isPending}>
               Simpan
