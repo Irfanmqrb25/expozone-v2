@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MouseEventHandler } from "react";
-import { useRouter } from "next/navigation";
 
 import {
   Card,
@@ -30,7 +29,6 @@ interface ProductCard {
 
 const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
   const cart = useCart();
-  const router = useRouter();
 
   const storeUrl =
     productData.store.name.split(" ").length > 1
@@ -59,7 +57,10 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
         </div>
       </div>
       <CardContent className="py-4 space-y-2">
-        <Link href={`/visit/${storeUrl}`} className="flex items-center gap-2">
+        <Link
+          href={`/visit/${storeUrl}`}
+          className="z-10 flex items-center gap-2 w-fit"
+        >
           <Avatar className="w-6 h-6">
             <AvatarImage
               alt="Product Image"
@@ -71,27 +72,32 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
             {productData.store.name}
           </p>
         </Link>
-        <div>
-          <CardTitle className="text-lg font-medium line-clamp-1">
-            {productData.name}
-          </CardTitle>
-          <CardDescription className="font-light text-gray-500 line-clamp-1">
-            {productData.description}
-          </CardDescription>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="font-medium line-clamp-1">
-            {rupiahFormat(Number(productData.price))}
-          </p>
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="flex items-center gap-1 text-sm font-medium text-black/70 hover:text-black"
-          >
-            <ShoppingCart size={14} />
-            Keranjang
-          </button>
-        </div>
+        <Link
+          href={`/${storeUrl}/${productData.id}`}
+          className="flex flex-col gap-2"
+        >
+          <div>
+            <CardTitle className="text-lg font-medium line-clamp-1">
+              {productData.name}
+            </CardTitle>
+            <CardDescription className="font-light text-gray-500 line-clamp-1">
+              {productData.description}
+            </CardDescription>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="font-medium line-clamp-1">
+              {rupiahFormat(Number(productData.price))}
+            </p>
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="z-10 flex items-center gap-1 text-sm font-medium text-black/70 hover:text-black"
+            >
+              <ShoppingCart size={14} />
+              Keranjang
+            </button>
+          </div>
+        </Link>
       </CardContent>
     </Card>
   );

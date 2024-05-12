@@ -19,6 +19,7 @@ const DetailProductPage = async ({ params }: { params: IProductParams }) => {
   if (!product) {
     notFound();
   }
+
   return (
     <DetailProductPageClient
       product={product}

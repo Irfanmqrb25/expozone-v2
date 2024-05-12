@@ -28,7 +28,7 @@ const AssetCard = ({
 }: AssetCardProps) => {
   const handleDownloadAsset = () => {
     if (!isOwnProduct) {
-      return toast.error("Buy product to access asset!");
+      return toast.error("Beli produk untuk mendapatkan aset!");
     }
     window.open(assetData.url, "_blank");
   };

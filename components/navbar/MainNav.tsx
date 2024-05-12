@@ -41,10 +41,10 @@ const MainNav: React.FC<MainNavProps> = ({ session, store }) => {
             </span>
           </div>
           <div className="items-center hidden mt-[6px] ml-10 gap-14 lg:flex">
-            <Link href="/featured">Featured</Link>
-            <Link href="/discover">Discover</Link>
-            <Link href="/products">Products</Link>
-            <Link href="/store">Store</Link>
+            <Link href="/featured">Unggulan</Link>
+            <Link href="/discover">Pencarian</Link>
+            <Link href="/products">Produk</Link>
+            <Link href="/store">Toko</Link>
           </div>
         </div>
         <div className="flex items-center justify-end gap-2 md:gap-3">

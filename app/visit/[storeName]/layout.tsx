@@ -45,10 +45,10 @@ export default async function Layout({
       <MainNav session={session} />
       <Container>
         <div className="min-h-screen pt-20">
-          <Card className="p-4 border-2 border-black">
+          <Card className="p-4">
             <div className="flex flex-col items-center md:flex-row md:justify-between">
               <div className="flex items-center justify-center gap-3 xl:justify-start">
-                <Avatar className="w-12 h-12 border-2 border-black">
+                <Avatar className="w-12 h-12">
                   <AvatarImage
                     className="object-cover"
                     src={store?.image || "/assets/blank-user.jpg"}
@@ -58,7 +58,7 @@ export default async function Layout({
               </div>
               <div className="flex items-center gap-1">
                 <MapPin size={16} />
-                {store.city}, {store?.country}
+                {store.city}, {store.country}
               </div>
             </div>
           </Card>

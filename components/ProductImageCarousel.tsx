@@ -9,7 +9,6 @@ import useEmblaCarousel, {
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-// import { Icons } from "@/components/icons"
 
 type CarouselApi = UseEmblaCarouselType["1"];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -73,22 +72,6 @@ export function ProductImageCarousel({
     emblaApi.on("reInit", onSelect);
     emblaApi.on("select", onSelect);
   }, [emblaApi, onSelect]);
-
-  //   if (images.length === 0) {
-  //     return (
-  //       <div
-  //         aria-label="Product Placeholder"
-  //         role="img"
-  //         aria-roledescription="placeholder"
-  //         className="flex items-center justify-center flex-1 aspect-square size-full bg-secondary"
-  //       >
-  //         <Icons.placeholder
-  //           className="size-9 text-muted-foreground"
-  //           aria-hidden="true"
-  //         />
-  //       </div>
-  //     )
-  //   }
 
   return (
     <div

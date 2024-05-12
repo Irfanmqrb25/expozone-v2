@@ -38,7 +38,7 @@ const FeaturedPage = async () => {
           Kemudahan, Ragam, dan Hemat di Expozone, Surga Belanja Digitalmu.
         </p>
       </div>
-      <Card className="flex flex-col py-16 text-center border-2 border-black my-shadow my-14 gap-7">
+      <Card className="flex flex-col px-4 py-16 text-center border-2 bg-[#F9F6EE] border-black my-shadow my-14 gap-7">
         <h1 className="text-2xl font-semibold md:text-3xl">
           Jual Atau Beli Produk Digital Yang Anda Inginkan Disini!
         </h1>
@@ -91,7 +91,7 @@ const FeaturedPage = async () => {
             <ChevronRightIcon size={16} />
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-5 mx-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-3 2xl:gap-5 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-5 mx-1 mb-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-3 2xl:gap-5 xl:grid-cols-5">
           {TopProducts?.map((product) => (
             <ProductCard
               key={product.id}

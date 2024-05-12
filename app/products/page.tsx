@@ -18,7 +18,7 @@ const ProductsPage = async ({ searchParams }: HomePageProps) => {
   return (
     <>
       {products?.length > 0 ? (
-        <div className="grid grid-cols-1 gap-5 mx-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-2 2xl:gap-5 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-5 mx-1 mb-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-2 2xl:gap-5 xl:grid-cols-5">
           {products.map((product) => (
             <ProductCard
               key={product.id}

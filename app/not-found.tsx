@@ -6,6 +6,8 @@ import MainNav from "@/components/navbar/MainNav";
 
 import getStore from "@/actions/getStore";
 import { getCurrentUser } from "@/data/get-user";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 export default async function NotFound() {
   const session = await getCurrentUser();
@@ -15,17 +17,22 @@ export default async function NotFound() {
       <MainNav session={session} store={store!} />
       <div className="py-40">
         <Container>
-          <div className="flex flex-col items-center justify-center gap-2">
+          <div className="flex flex-col items-center justify-center">
             <Image
               src="/assets/not-found.jpg"
-              alt=""
+              alt="image not found"
               width={400}
               height={400}
             />
-            <div className="flex flex-col items-center gap-1">
-              <h1 className="text-3xl font-semibold">Page Not Found</h1>
-              <Link href="/" className="px-2 py-1 text-white bg-black rounded">
-                Go Back
+            <div className="flex flex-col items-center gap-4">
+              <h1 className="text-2xl font-semibold md:text-2xl">
+                Halaman Tidak Ditemukan
+              </h1>
+              <Link
+                href="/"
+                className={cn(buttonVariants({ variant: "default" }))}
+              >
+                Kembali
               </Link>
             </div>
           </div>

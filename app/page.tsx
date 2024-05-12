@@ -24,7 +24,7 @@ const LandingPage = async () => {
       <Header session={session!} />
       <div className="flex flex-col w-full mt-16 border-b-2 border-black lg:flex-row lg:mt-0">
         <div className="flex flex-col items-center border-b-2 xl:border-b-0 lg:border-r-2 border-black justify-center mx-auto space-y-6 lg:space-y-4 bg-[#FF6D28] w-full lg:w-1/2 h-[500px] text-center">
-          <h2 className="w-full mx-auto text-3xl font-medium md:font-semibold md:text-5xl md:w-[55%]">
+          <h2 className="mx-auto text-3xl font-medium md:font-semibold md:text-5xl w-[90%] md:w-[55%]">
             JUAL & BELI PRODUK DIGITAL DI EXPOZONE
           </h2>
           <p
@@ -79,12 +79,12 @@ const LandingPage = async () => {
       </div>
       <div className="flex flex-col w-full border-black lg:flex-row border-y-2">
         <div className="flex flex-col items-center border-b-2 xl:border-b-0 lg:border-r-2 border-black justify-center bg-[#006E7F] w-full lg:w-1/2 h-[500px]">
-          <div className="relative w-4/5 overflow-hidden bg-white border-2 md:w-2/3 h-3/4 group aspect-square border-neutral-200">
+          <div className="relative w-4/5 overflow-hidden md:w-2/3 h-2/3 md:h-4/5 xl:h-[90%] aspect-square">
             <Image
-              alt="warning new seller"
-              src="/assets/landing-page/shopping.jpg"
+              alt="become a new seller"
+              src="/assets/landing-page/become-seller.svg"
               fill
-              className="object-cover w-full h-full transition group-hover:scale-110"
+              className="object-cover w-full h-full"
             />
           </div>
         </div>
@@ -138,16 +138,14 @@ const LandingPage = async () => {
         Lihatlah Mimpi Anda Menghasilkan Keberhasilan Luar Biasa!
       </div>
       <div className="flex flex-col w-full border-black lg:flex-row border-y-2">
-        <div className="flex flex-col border-b-2 xl:border-b-0 lg:border-r-2 border-black bg-[#F5C6EC] w-full lg:w-1/2 h-[500px]">
-          <div className="flex flex-col items-center justify-center my-auto">
-            <div className="relative w-4/5 overflow-hidden bg-white border-2 shadow md:w-2/3 h-3/4 group aspect-square border-neutral-200">
-              <Image
-                alt="warning new seller"
-                src="/assets/landing-page/video.jpg"
-                fill
-                className="object-cover w-full h-full transition group-hover:scale-110"
-              />
-            </div>
+        <div className="flex flex-col items-center justify-center border-b-2 xl:border-b-0 lg:border-r-2 border-black bg-[#F5C6EC] w-full lg:w-1/2 h-[500px]">
+          <div className="relative w-4/5 overflow-hidden md:w-2/3 h-2/3 md:h-4/5 xl:h-[90%] aspect-square">
+            <Image
+              alt="product categories"
+              src="/assets/landing-page/category-product.svg"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
         <div className="bg-[#AA77FF] w-full lg:w-1/2 h-[500px]">

@@ -160,8 +160,8 @@ model Order {
 }
 
 model OrderItem {
-  id        String  @id @default(uuid())
-  createdAt  DateTime @default(now())
+  id        String   @id @unique
+  createdAt DateTime @default(now())
 
   orderId   String
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)

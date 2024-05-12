@@ -68,6 +68,11 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
       enableHiding: false,
     },
     {
+      accessorKey: "id",
+      header: "Order ID",
+      cell: ({ row }) => <p>{row.original.id}</p>,
+    },
+    {
       accessorKey: "product",
       header: "Produk",
       cell: ({ row }) => <p>{row.original.product.name}</p>,
@@ -82,7 +87,13 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
     {
       accessorKey: "order",
       header: "Status Pembelian",
-      cell: ({ row }) => <p>{row.original.order.status}</p>,
+      cell: ({ row }) => (
+        <p>
+          {row.original.order.status === "PENDING" && "Menunggu Konfirmasi"}
+          {row.original.order.status === "PAID" && "Dibayar"}
+          {row.original.order.status === "CANCELED" && "Dibatalkan"}
+        </p>
+      ),
     },
     {
       accessorKey: "createdAt",

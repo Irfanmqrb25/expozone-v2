@@ -49,7 +49,7 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
     resolver: zodResolver(UpdateStoreSchema),
     defaultValues: {
       name: store.name,
-      image: store.image || "/blank-user.jpg",
+      image: store.image || "",
       email: store.email,
       country: store.country,
       city: store.city,

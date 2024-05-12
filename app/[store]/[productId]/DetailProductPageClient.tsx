@@ -118,18 +118,18 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
   }, []);
 
   return (
-    <div className="container px-0 space-y-12">
+    <div className="px-0 space-y-12">
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
         <ProductImageCarousel
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 2xl:w-1/3"
           images={product?.images ?? []}
           options={{
             loop: true,
           }}
         />
-        <div className="flex flex-col w-full gap-4 md:w-1/2">
+        <div className="flex flex-col w-full gap-4 md:w-1/2 2xl:w-[66.7%]">
           <Link href={`/visit/${storeUrl}`} className="hover:bg-gray-100">
-            <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-00">
+            <div className="flex items-center justify-between w-full px-2 py-2 border rounded-md">
               <div className="flex items-center gap-2">
                 <Avatar className="border border-gray-300 w-9 h-9">
                   <AvatarImage
@@ -191,6 +191,7 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
           </div>
         </div>
       </div>
+      <Separator />
       <div className="space-y-4">
         <div className="flex items-center gap-1">
           <BiMessageSquareDots className="w-5 h-5 lg:w-7 lg:h-7" />
@@ -199,22 +200,26 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
           </h5>
         </div>
         <div className="flex flex-col gap-2">
-          {reviews.map((review) => (
-            <div className="py-4 space-y-2 border-b" key={review.id}>
-              <div className="flex items-center gap-2">
-                <Avatar className="w-9 h-9">
-                  <AvatarImage src={review.user.image || "/blank-user.jpg"} />
-                </Avatar>
-                <div>
-                  <p className="font-medium">{review.user.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {format(new Date(review.createdAt), "dd/MM/yyyy")}
-                  </p>
+          {reviews.length > 0 ? (
+            reviews.map((review) => (
+              <div className="py-4 space-y-2 border-b" key={review.id}>
+                <div className="flex items-center gap-2">
+                  <Avatar className="w-9 h-9">
+                    <AvatarImage src={review.user.image || "/blank-user.jpg"} />
+                  </Avatar>
+                  <div>
+                    <p className="font-medium">{review.user.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {format(new Date(review.createdAt), "dd/MM/yyyy")}
+                    </p>
+                  </div>
                 </div>
+                <p>{review.message}</p>
               </div>
-              <p>{review.message}</p>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="mb-28">Tidak ada ulasan</p>
+          )}
         </div>
       </div>
     </div>

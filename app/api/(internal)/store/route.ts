@@ -8,18 +8,30 @@ export async function POST(request: Request) {
   const session = await getCurrentUser();
 
   if (!session) {
-    return NextResponse.json("unauthorized");
+    return NextResponse.json("unauthorized", { status: 401 });
   }
 
   const body = await request.json();
   const { name, image, email, country, city, address, description } = body;
+
+  if (!name || !country || !city || !address || !description)
+    return NextResponse.json("All fields are required", { status: 400 });
+
+  const storeExists = await db.store.findUnique({
+    where: {
+      name: name,
+    },
+  });
+
+  if (storeExists) {
+    return NextResponse.json("Nama toko sudah digunakan", { status: 400 });
+  }
 
   const store = await db.store.create({
     data: {
       name,
       image,
       email,
-      // country: country.label,
       country,
       city,
       address,
@@ -38,11 +50,12 @@ export async function PUT(request: Request) {
   if (!session) {
     return NextResponse.json("unauthorized");
   }
+
   const body = await request.json();
   const { name, image, email, country, city, address, description } = body;
 
   if (!name || !image || !country || !city || !address || !description)
-    return NextResponse.json("All fields are required");
+    return NextResponse.json("All fields are required", { status: 400 });
 
   const updatedStore = await db.store.update({
     where: { id: store?.id },
@@ -65,7 +78,7 @@ export async function DELETE(request: Request) {
   const store = await getStore();
 
   if (!session) {
-    return NextResponse.json("unauthorized");
+    return NextResponse.json("unauthorized", { status: 401 });
   }
 
   await db.store.delete({

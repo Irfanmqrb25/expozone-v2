@@ -35,6 +35,7 @@ export async function POST(request: Request) {
     });
 
     const order_id = orderId.generate();
+    const order_items_id = `OI-${orderId.generate()}`;
 
     let snap = new midtransClient.Snap({
       isProduction: false,
@@ -79,6 +80,7 @@ export async function POST(request: Request) {
         token: transaction.token,
         orderItems: {
           create: products.map((product) => ({
+            id: order_items_id,
             product: {
               connect: {
                 id: product.id,

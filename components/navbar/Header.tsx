@@ -1,17 +1,17 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Fredoka } from "next/font/google";
-import { Patrick_Hand } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
+import { Fredoka } from "next/font/google";
+import { useEffect, useState } from "react";
+import { Patrick_Hand } from "next/font/google";
 
-import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
-import { IoCubeOutline } from "react-icons/io5";
-import { BiNews } from "react-icons/bi";
-import { MdOutlineFeaturedPlayList, MdOutlineSell } from "react-icons/md";
-import { Slant as Hamburger } from "hamburger-react";
 import clsx from "clsx";
 import { ExtendedSession } from "@/next-auth";
+import { AiOutlineUser } from "react-icons/ai";
+import { IoCubeOutline } from "react-icons/io5";
+import { Sparkles, Store } from "lucide-react";
+import { RiPhoneFindLine } from "react-icons/ri";
+import { Slant as Hamburger } from "hamburger-react";
 
 const fredoka = Fredoka({
   weight: ["600"],
@@ -75,9 +75,9 @@ const Header: React.FC<HeaderProps> = ({ session }) => {
             className="border-l-2 border-black px-14 py-[29px] hover:bg-[#23A094] cursor-pointer"
           >
             {session ? (
-              <p className={clsx("text-2xl", patrickHand.className)}>NEXT</p>
+              <p className={clsx("text-2xl", patrickHand.className)}>LANJUT</p>
             ) : (
-              <p className={clsx("text-2xl", patrickHand.className)}>SIGN IN</p>
+              <p className={clsx("text-2xl", patrickHand.className)}>MASUK</p>
             )}
           </Link>
         </div>
@@ -121,17 +121,17 @@ const Header: React.FC<HeaderProps> = ({ session }) => {
                 isScrolled ? "space-x-16" : "space-x-24"
               )}
             >
-              <Link href="/featured">FEATURED</Link>
-              <Link href="/products">PRODUCTS</Link>
-              <Link href="/discover/search?st=new-arrival">NEW ARRIVALS</Link>
-              <Link href={session ? "/store" : "/auth/sign-in"}>STORE</Link>
+              <Link href="/featured">UNGGULAN</Link>
+              <Link href="/discover">PENCARIAN</Link>
+              <Link href="/products">PRODUK</Link>
+              <Link href={session ? "/store" : "/auth/sign-in"}>TOKO</Link>
             </ul>
             {isScrolled && (
               <Link
                 href={session ? "/featured" : "/auth/sign-in"}
                 className="border border-black px-6 py-2 hover:bg-[#23A094] hover:text-white tracking-wider"
               >
-                {session ? "NEXT" : "SIGN IN"}
+                {session ? "LANJUT" : "MASUK"}
               </Link>
             )}
           </div>
@@ -182,39 +182,39 @@ const Header: React.FC<HeaderProps> = ({ session }) => {
           {isOpen && (
             <>
               <Link
-                href="/auth/sign-in"
-                className="flex items-center gap-4 p-3 hover:text-[#23A094]"
-              >
-                <AiOutlineUser />
-                <span>Sign In</span>
-              </Link>
-              <Link
                 href="/featured"
-                className="flex items-center gap-4 p-3  hover:text-[#23A094]"
+                className="flex items-center gap-4 px-3 py-2  hover:text-[#23A094]"
               >
-                <MdOutlineFeaturedPlayList />
-                <span>Featured</span>
-              </Link>
-              <Link
-                href="/products"
-                className=" flex items-center gap-4 p-3  hover:text-[#23A094]"
-              >
-                <IoCubeOutline />
-                <span>Products</span>
+                <Sparkles size={18} />
+                <span>Unggulan</span>
               </Link>
               <Link
                 href="/discover/search?st=new-arrival"
-                className="flex items-center gap-4 p-3  hover:text-[#23A094]"
+                className="flex items-center gap-4 px-3 py-2  hover:text-[#23A094]"
               >
-                <MdOutlineSell />
-                <span>New Arrivals</span>
+                <RiPhoneFindLine />
+                <span>Cari Produk</span>
+              </Link>
+              <Link
+                href="/products"
+                className=" flex items-center gap-4 px-3 py-2  hover:text-[#23A094]"
+              >
+                <IoCubeOutline />
+                <span>Produk</span>
               </Link>
               <Link
                 href={session ? "/store" : "/auth/sign-in"}
-                className="flex items-center gap-4 p-3 hover:text-[#23A094]"
+                className="flex items-center gap-4 px-3 py-2 hover:text-[#23A094]"
               >
-                <BiNews />
-                <span>Store</span>
+                <Store size={18} />
+                <span>Toko</span>
+              </Link>
+              <Link
+                href="/auth/sign-in"
+                className="flex items-center gap-4 px-3 py-2 hover:text-[#23A094]"
+              >
+                <AiOutlineUser />
+                <span>Masuk</span>
               </Link>
             </>
           )}

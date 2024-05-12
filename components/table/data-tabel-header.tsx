@@ -30,7 +30,7 @@ const DataTableHeader = ({
           placeholder={
             pathname === "/store/products"
               ? "Cari nama produk..."
-              : "Cari nama produk..."
+              : "Cari order id..."
           }
           value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>

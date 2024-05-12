@@ -36,7 +36,7 @@ export const signUp = async (data: z.infer<typeof SignUpSchema>) => {
   const validatedFields = SignUpSchema.safeParse(data);
 
   if (!validatedFields.success) {
-    return { error: "Invalid fields!" };
+    return { error: "Data yang dimasukkan tidak valid" };
   }
 
   const { email, name, password } = validatedFields.data;
@@ -53,7 +53,7 @@ export const signUp = async (data: z.infer<typeof SignUpSchema>) => {
   // Jika email sudah digunakan, kembalikan pesan kesalahan
   if (existingUser) {
     return {
-      error: "Email already in use!",
+      error: "Alamat email telah digunakan!",
     };
   }
 
@@ -76,7 +76,7 @@ export const signUp = async (data: z.infer<typeof SignUpSchema>) => {
   );
 
   return {
-    success: "Confirmation email sent!",
+    success: "Konfirmasi email telah dikirim!",
   };
 };
 
@@ -87,7 +87,7 @@ export const signIn = async (
   const validatedFields = SignInSchema.safeParse(data);
 
   if (!validatedFields.success) {
-    return { error: "Invalid fields!" };
+    return { error: "Data yang dimasukkan tidak valid" };
   }
 
   const { email, password, code } = validatedFields.data;
@@ -97,7 +97,7 @@ export const signIn = async (
 
   // Jika pengguna tidak ditemukan atau email/password tidak tersedia, kembalikan pesan kesalahan
   if (!existingUser || !existingUser.email || !existingUser.password) {
-    return { error: "Email does not exist!" };
+    return { error: "Alamat email tidak ditemukan" };
   }
 
   // Jika email belum terverifikasi
@@ -111,7 +111,7 @@ export const signIn = async (
     await sendVerificationEmail(existingUser.email, verificationToken.token);
 
     return {
-      success: "Confirmation Email sent!",
+      success: "Konfirmasi email telah dikirim!",
     };
   }
 
@@ -122,14 +122,14 @@ export const signIn = async (
       const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email);
       if (!twoFactorToken) {
         return {
-          error: "Invalid code!",
+          error: "Kode yang anda masukkan salah!",
         };
       }
 
       // Periksa apakah kode dua faktor yang diberikan dengan yang dimasukkan sama
       if (twoFactorToken.token !== code) {
         return {
-          error: "Invalid code!",
+          error: "Kode yang anda masukkan salah!",
         };
       }
 
@@ -137,7 +137,7 @@ export const signIn = async (
       const hasExpired = new Date(twoFactorToken.expires) < new Date();
       if (hasExpired) {
         return {
-          error: "Code expired!",
+          error: "Kode yang dimasukkan telah kedaluwarsa!",
         };
       }
 
@@ -192,9 +192,9 @@ export const signIn = async (
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials!" };
+          return { error: "Email atau kata sandi salah" };
         default:
-          return { error: "Something went wrong!" };
+          return { error: "Terjadi kesalahan" };
       }
     }
 

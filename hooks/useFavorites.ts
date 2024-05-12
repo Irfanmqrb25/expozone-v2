@@ -31,10 +31,10 @@ const useFavorite = ({ productId, session }: IUseFavorite) => {
       try {
         if (hasFavorited) {
           request = () => axios.delete(`/api/favorites/${productId}`);
-          toastMessage = "Product has been removed from favorites";
+          toastMessage = "Produk di hapus dari favorit";
         } else {
           request = () => axios.post(`/api/favorites/${productId}`);
-          toastMessage = "Product added to favorites";
+          toastMessage = "Product ditambahkan ke favorit";
         }
 
         await request();

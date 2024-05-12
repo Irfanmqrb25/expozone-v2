@@ -1,14 +1,10 @@
-import Image from "next/image";
-
-import SubscribeInput from "@/components/input/SubscribeInput";
-
-import { BsInstagram, BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
 import { Locate, Mail, Phone } from "lucide-react";
+import Container from "../Container";
 
 const Footer = () => {
   return (
-    <footer className="py-8 text-white bg-black">
-      <div className="container px-4 md:px-6">
+    <footer className="py-4 text-white bg-black">
+      <Container>
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div className="w-full md:w-1/3">
             <h3 className="mb-4 text-lg font-semibold">Tentang Kami</h3>
@@ -38,7 +34,7 @@ const Footer = () => {
         <div className="mt-8 text-center">
           <p>© 2024 Expozone.</p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
       <DataTableHeader
         store={store}
         table={table}
-        searchKey={pathaname === "/store/products" ? "name" : "product"}
+        searchKey={pathaname === "/store/products" ? "name" : "id"}
         deleteRowAction={deleteRowsAction}
       />
       <div className="mb-2 min-h-[400px] border rounded-md">

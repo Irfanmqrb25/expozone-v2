@@ -64,7 +64,7 @@ const FeaturedCarousel = () => {
             key={item.id}
             className="relative border-2 border-black rounded-sm h-[300px] md:h-[400px]"
           >
-            <div className="relative h-full overflow-hidden cursor-pointer">
+            <div className="h-full overflow-hidden cursor-pointer">
               <Image
                 alt={item.title}
                 src={item.src}
@@ -73,7 +73,7 @@ const FeaturedCarousel = () => {
               />
             </div>
             <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-white/20">
-              <div className="absolute top-6 -bottom-11 right-1 left-1 md:bottom-0 md:left-0 md:right-0 w-[70%] h-[70%] m-auto text-center md:top-0 md:w-fit md:h-fit">
+              <div className="flex items-center justify-center w-full h-full px-6">
                 <div
                   className={clsx(
                     "px-5 py-5 md:px-16 md:py-8 rounded-sm border-2 my-shadow border-black md:rounded-md",
@@ -81,7 +81,7 @@ const FeaturedCarousel = () => {
                     font.className
                   )}
                 >
-                  <h1 className="text-sm font-bold tracking-wider uppercase md:text-lg lg:text-xl">
+                  <h1 className="text-sm font-bold tracking-wider text-center uppercase md:text-lg lg:text-xl">
                     {item.title}
                   </h1>
                 </div>

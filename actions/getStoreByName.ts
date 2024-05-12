@@ -31,6 +31,7 @@ export default async function getStorebyName(params: IParams) {
             id: true,
             name: true,
             images: true,
+            description: true,
             price: true,
             isFeatured: true,
             store: true,

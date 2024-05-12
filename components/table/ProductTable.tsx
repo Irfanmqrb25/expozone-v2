@@ -83,6 +83,7 @@ export default function ProductTable({
     {
       accessorKey: "isFeatured",
       header: "Unggulan",
+      cell: ({ row }) => <p>{row.original.isFeatured ? "Ya" : "Tidak"}</p>,
     },
     {
       accessorKey: "createdAt",

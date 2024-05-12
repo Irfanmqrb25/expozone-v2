@@ -71,8 +71,8 @@ const CreateStoreModal = () => {
         createStoreModal.onClose();
         toast.success("Toko berhasil dibuat!");
       })
-      .catch(() => {
-        toast.error("Terjadi kesalahan!");
+      .catch((e) => {
+        toast.error(e.response.data);
       })
       .finally(() => {
         setIsLoading(false);

@@ -1,6 +1,5 @@
-import Image from "next/image";
-import { Fredoka } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   Sheet,
@@ -9,16 +8,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-import clsx from "clsx";
 import { ScrollArea } from "../ui/scroll-area";
-import { HomeIcon, Menu, Search, ShoppingBag, Store } from "lucide-react";
 
-const fredoka = Fredoka({
-  weight: ["300", "400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--fredoka-font",
-});
+import { Menu, Search, ShoppingBag, Sparkles, Store } from "lucide-react";
 
 const MobileSheet = () => {
   return (
@@ -26,7 +18,7 @@ const MobileSheet = () => {
       <SheetTrigger>
         <Menu size={30} />
       </SheetTrigger>
-      <SheetContent side="left" className={clsx(fredoka.className)}>
+      <SheetContent side="left">
         <SheetHeader>
           <SheetTitle className="flex gap-2 text-2xl">
             <Image
@@ -40,22 +32,22 @@ const MobileSheet = () => {
         </SheetHeader>
         <ScrollArea className="mt-10">
           <Link href="/featured" className="flex justify-between">
-            <p className="font-medium font">Featured</p>
-            <HomeIcon size={18} />
+            <p className="font-medium font">Unggulan</p>
+            <Sparkles size={18} />
           </Link>
           <hr className="mt-2 mb-4" />
           <Link href="/discover" className="flex justify-between">
-            <p className="font-medium font">Discover</p>
+            <p className="font-medium font">Pencarian</p>
             <Search size={18} />
           </Link>
           <hr className="mt-2 mb-4" />
           <Link href="/products" className="flex justify-between">
-            <p className="font-medium font">Products</p>
+            <p className="font-medium font">Produk</p>
             <ShoppingBag size={18} />
           </Link>
           <hr className="mt-2 mb-4" />
           <Link href="/store" className="flex justify-between">
-            <p className="font-medium font">Store</p>
+            <p className="font-medium font">Toko</p>
             <Store size={18} />
           </Link>
           <hr className="mt-2 mb-4" />
