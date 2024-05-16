@@ -6,14 +6,14 @@ export async function DELETE(request: Request) {
     const session = await getCurrentUser();
 
     if (!session) {
-      return new Response("Unauthorized", { status: 401 });
+      return new Response("Akses tidak diizinkan!", { status: 401 });
     }
 
     const body = await request.json();
     const { orderId } = body;
 
     if (!orderId) {
-      return new Response("Order id is required.", { status: 400 });
+      return new Response("ID pemesanan dibutuhkan!", { status: 400 });
     }
 
     const order = await db.order.findUnique({
@@ -23,11 +23,11 @@ export async function DELETE(request: Request) {
     });
 
     if (!order) {
-      return new Response("Order not found", { status: 404 });
+      return new Response("Pesanan tidak ditemukan", { status: 404 });
     }
 
     if (order.userId !== session.id) {
-      return new Response("Forbidden", { status: 403 });
+      return new Response("Akses terlarang!", { status: 403 });
     }
 
     await db.order.update({

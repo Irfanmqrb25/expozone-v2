@@ -23,7 +23,18 @@ export async function POST(request: Request) {
     productAssets,
   } = body;
 
-  const product = await db.product.create({
+  if (
+    !name ||
+    !category ||
+    !description ||
+    !price ||
+    !isFeatured ||
+    !productAssets
+  ) {
+    return NextResponse.json("All fields are required", { status: 400 });
+  }
+
+  await db.product.create({
     data: {
       name,
       images,
@@ -39,7 +50,7 @@ export async function POST(request: Request) {
       storeId: store?.id!,
     },
   });
-  return NextResponse.json(product);
+  return NextResponse.json("Produk berhasil ditambahkan");
 }
 
 export async function DELETE(

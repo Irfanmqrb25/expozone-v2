@@ -93,7 +93,7 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
               <div>
                 <FormLabel>Gambar Produk</FormLabel>
                 <p className="text-sm text-muted-foreground">
-                  makasimal 3 gambar untuk diunggah.
+                  maksimal 3 gambar untuk diunggah.
                 </p>
               </div>
               <FormControl>

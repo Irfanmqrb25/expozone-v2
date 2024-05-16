@@ -12,18 +12,18 @@ export async function POST(request: Request) {
     const session = await getCurrentUser();
 
     if (!session) {
-      return new Response("Unauthorized", { status: 401 });
+      return new Response("Akses tidak diizinkan!", { status: 401 });
     }
 
     const body = await request.json();
     const { productIds, totalPrice } = CheckoutSchema.parse(body);
 
     if (!productIds || productIds.length === 0) {
-      return new Response("Product ids are required.", { status: 400 });
+      return new Response("Product id dibutuhkan!", { status: 400 });
     }
 
     if (!totalPrice) {
-      return new Response("Total price is required.", { status: 400 });
+      return new Response("Total harga dibutuhkan!", { status: 400 });
     }
 
     const products = await db.product.findMany({
@@ -99,10 +99,12 @@ export async function POST(request: Request) {
     return NextResponse.json(transaction);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response("Invalid request data passed", { status: 422 });
+      return new Response("Data permintaan yang diteruskan tidak valid", {
+        status: 422,
+      });
     }
 
-    return new Response("Could not create transaction, try again", {
+    return new Response("Tidak dapat membuat transaksi, coba lagi", {
       status: 500,
     });
   }
