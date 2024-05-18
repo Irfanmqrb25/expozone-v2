@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import CardEditUser from "@/components/card/CardEditUser";
 import {
@@ -20,9 +20,11 @@ import { useForm } from "react-hook-form";
 import { changePassword } from "@/actions/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangePasswordSchema } from "@/lib/validations/user";
+import { Loader2 } from "lucide-react";
 
 const ChangePasswordForm = () => {
   const [isPending, startTransition] = useTransition();
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
   const form = useForm<z.infer<typeof ChangePasswordSchema>>({
     resolver: zodResolver(ChangePasswordSchema),
@@ -37,16 +39,39 @@ const ChangePasswordForm = () => {
     startTransition(() => {
       changePassword(data).then((data) => {
         if (data.error) {
-          form.reset();
+          form.reset({
+            password: "",
+            newPassword: "",
+            confirmPassword: "",
+          });
           return toast.error(data.error);
         }
         if (data.success) {
-          form.reset();
+          form.reset({
+            password: "",
+            newPassword: "",
+            confirmPassword: "",
+          });
           return toast.success(data.success);
         }
       });
     });
   };
+
+  const { watch } = form;
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      const { password, newPassword, confirmPassword } = value;
+      const isChanged =
+        password?.length !== 0 &&
+        newPassword?.length !== 0 &&
+        confirmPassword?.length !== 0;
+      setIsFormChanged(isChanged);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <CardEditUser
@@ -102,7 +127,12 @@ const ChangePasswordForm = () => {
             )}
           />
           <div className="flex items-center justify-end">
-            <Button type="submit" disabled={isPending}>
+            <Button
+              type="submit"
+              className="flex items-center gap-2 w-fit"
+              disabled={isPending || !isFormChanged}
+            >
+              {isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               Simpan
             </Button>
           </div>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import AuthCard from "../card/AuthCard";
+import { useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
+
 import {
   Form,
   FormControl,
@@ -11,17 +12,19 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useState, useTransition } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import AuthCard from "../card/AuthCard";
+import { PasswordInput } from "../input/PasswordInput";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
+
 import * as z from "zod";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { signIn } from "@/actions/auth";
+import { useForm } from "react-hook-form";
 import { SignInSchema } from "@/lib/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "../ui/input";
-import { PasswordInput } from "../input/PasswordInput";
-import { Button } from "../ui/button";
-import { toast } from "sonner";
-import { useSearchParams } from "next/navigation";
-import { signIn } from "@/actions/auth";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 
 const SignInForm = () => {
   const params = useSearchParams();
@@ -137,7 +140,12 @@ const SignInForm = () => {
               />
             </>
           )}
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button
+            type="submit"
+            className="flex items-center w-full gap-2"
+            disabled={isPending}
+          >
+            {isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             {showTwoFactor ? "Konfirmasi" : "Masuk"}
           </Button>
         </form>

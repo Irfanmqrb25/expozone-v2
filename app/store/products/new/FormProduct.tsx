@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -31,14 +32,14 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { Link2, Loader2 } from "lucide-react";
 import { productCategories } from "@/lib/data";
-import { HiComputerDesktop, HiLink } from "react-icons/hi2";
-import { ProductSchema } from "@/lib/validations/product";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ProductSchema } from "@/lib/validations/product";
+import { HiComputerDesktop, HiLink } from "react-icons/hi2";
 
 const FormProduct = () => {
   const router = useRouter();
   const [uploadWithLink, setUploadWithLink] = useState(false);
-  const [uploadFromComputer, setUploadFromComputer] = useState(false);
+  const [uploadFromComputer, setUploadFromComputer] = useState(true);
 
   const form = useForm<z.infer<typeof ProductSchema>>({
     resolver: zodResolver(ProductSchema),
@@ -84,9 +85,9 @@ const FormProduct = () => {
             <FormItem>
               <div>
                 <FormLabel>Gambar Produk</FormLabel>
-                <p className="text-sm text-muted-foreground">
+                <FormDescription>
                   maksimal 3 gambar untuk diunggah.
-                </p>
+                </FormDescription>
               </div>
               <FormControl>
                 <FileUpload
@@ -201,7 +202,12 @@ const FormProduct = () => {
           )}
         />
         <div className="space-y-2">
-          <FormLabel>Aset Produk</FormLabel>
+          <div>
+            <FormLabel>Aset Produk</FormLabel>
+            <FormDescription>
+              Anda dapat mengunggah asset produk meggunakan file atau link
+            </FormDescription>
+          </div>
           <div className="flex items-center gap-4">
             <Button
               size="sm"
@@ -289,7 +295,11 @@ const FormProduct = () => {
             />
           )}
         </div>
-        <Button type="submit" className="flex items-center w-full gap-2">
+        <Button
+          disabled={isLoading}
+          type="submit"
+          className="flex items-center w-full gap-2"
+        >
           {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
           Tambah
         </Button>

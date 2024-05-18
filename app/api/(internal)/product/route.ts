@@ -23,14 +23,7 @@ export async function POST(request: Request) {
     productAssets,
   } = body;
 
-  if (
-    !name ||
-    !category ||
-    !description ||
-    !price ||
-    !isFeatured ||
-    !productAssets
-  ) {
+  if (!name || !category || !description || !price || !productAssets) {
     return NextResponse.json("All fields are required", { status: 400 });
   }
 

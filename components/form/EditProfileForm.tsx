@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 
 import {
   Form,
@@ -11,6 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Switch } from "../ui/switch";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import CardEditUser from "@/components/card/CardEditUser";
@@ -18,37 +19,60 @@ import UploadthingInput from "@/components/input/UploadthingInput";
 
 import * as z from "zod";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { ExtendedSession } from "@/next-auth";
 import { editProfile } from "@/actions/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileSchema } from "@/lib/validations/user";
-import { Switch } from "../ui/switch";
+import { useRouter } from "next/navigation";
+import { resetPassword } from "@/actions/auth";
 
 interface EditProfileFormProps {
   user: ExtendedSession;
 }
 
 const EditProfileForm = ({ user }: EditProfileFormProps) => {
+  const router = useRouter();
+  const [hasChanges, setHasChanges] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  const initialValues = useMemo(
+    () => ({
+      name: user.name || "",
+      image: user.image || "",
+      email: user.email || "",
+      isTwoFactorEnabled: user?.isTwoFactorEnabled || false,
+    }),
+    [user]
+  );
 
   const form = useForm<z.infer<typeof EditProfileSchema>>({
     resolver: zodResolver(EditProfileSchema),
-    defaultValues: {
-      name: user.name || undefined,
-      image: user.image || undefined,
-      email: user.email || undefined,
-      isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
-    },
+    defaultValues: initialValues,
   });
 
   const imageWatch = form.watch("image");
+
+  const { watch, handleSubmit, reset } = form;
 
   useEffect(() => {
     if (imageWatch) {
       form.setValue("image", imageWatch);
     }
   }, [imageWatch, form]);
+
+  useEffect(() => {
+    const subscription = watch((values) => {
+      const isChanged =
+        values.name !== initialValues.name ||
+        values.image !== initialValues.image ||
+        values.email !== initialValues.email ||
+        values.isTwoFactorEnabled !== initialValues.isTwoFactorEnabled;
+      setHasChanges(isChanged);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, initialValues]);
 
   const onSubmit = async (values: z.infer<typeof EditProfileSchema>) => {
     startTransition(() => {
@@ -57,6 +81,9 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
           return toast.error(data.error);
         }
         if (data?.success) {
+          router.refresh();
+          reset(values);
+          setHasChanges(!hasChanges);
           return toast.success(data.success);
         }
       });
@@ -69,7 +96,7 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
       description="Anda dapat mengedit profil di sini."
     >
       <Form {...form}>
-        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="image"
@@ -138,7 +165,12 @@ const EditProfileForm = ({ user }: EditProfileFormProps) => {
             />
           )}
           <div className="flex items-center justify-end">
-            <Button type="submit" disabled={isPending}>
+            <Button
+              type="submit"
+              className="flex items-center gap-2 w-fit"
+              disabled={isPending || !hasChanges}
+            >
+              {isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               Simpan
             </Button>
           </div>

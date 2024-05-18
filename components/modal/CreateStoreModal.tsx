@@ -32,6 +32,7 @@ const CreateStoreModal = () => {
     reset,
     setValue,
     watch,
+    setError,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -106,7 +107,7 @@ const CreateStoreModal = () => {
         <Input
           id="name"
           disabled={isLoading}
-          {...register("name", { required: true })}
+          {...register("name", { required: "Nama toko harus diisi" })}
           placeholder="Name your store"
           className={cn(
             "text-center",
@@ -127,7 +128,7 @@ const CreateStoreModal = () => {
             <Input
               id="email"
               disabled={isLoading}
-              {...register("email", { required: true })}
+              {...register("email", { required: "Email toko harus diisi" })}
               className={cn(
                 errors["email"]
                   ? "focus-visible:ring-red-500 border-red-300"
@@ -141,7 +142,9 @@ const CreateStoreModal = () => {
               <Input
                 id="country"
                 disabled={isLoading}
-                {...register("country", { required: true })}
+                {...register("country", {
+                  required: "Lokasi negara toko harus diisi",
+                })}
                 className={cn(
                   errors["address"]
                     ? "focus-visible:ring-red-500 border-red-300"
@@ -154,7 +157,9 @@ const CreateStoreModal = () => {
               <Input
                 id="city"
                 disabled={isLoading}
-                {...register("city", { required: true })}
+                {...register("city", {
+                  required: "Lokasi kota toko harus diisi",
+                })}
                 className={cn(
                   errors["address"]
                     ? "focus-visible:ring-red-500 border-red-300"
@@ -168,7 +173,9 @@ const CreateStoreModal = () => {
             <Input
               id="address"
               disabled={isLoading}
-              {...register("address", { required: true })}
+              {...register("address", {
+                required: "Alamat lengkap toko harus diisi",
+              })}
               className={cn(
                 errors["address"]
                   ? "focus-visible:ring-red-500 border-red-300"
@@ -181,7 +188,9 @@ const CreateStoreModal = () => {
             <Textarea
               id="description"
               disabled={isLoading}
-              {...register("description", { required: true })}
+              {...register("description", {
+                required: "Deskripsi toko harus diisi",
+              })}
               className={cn(
                 errors["description"]
                   ? "focus-visible:ring-red-500 border-red-300"

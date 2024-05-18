@@ -27,7 +27,7 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex flex-col items-center justify-between w-full gap-4 px-2 py-1 overflow-auto sm:flex-row sm:gap-8">
       <div className="flex-1 text-sm whitespace-nowrap text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
+        {table.getFilteredSelectedRowModel().rows.length} dari{" "}
         {table.getFilteredRowModel().rows.length} baris dipilih.
       </div>
       <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">

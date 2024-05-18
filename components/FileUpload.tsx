@@ -82,7 +82,7 @@ const FileUpload = ({
           content={{
             button({ ready }) {
               if (ready) return "Pilih Gambar";
-              return "Bersiap-siap...";
+              return "Tunggu...";
             },
             allowedContent({ uploadProgress, isUploading }) {
               if (isUploading) return `Mengunggah ${uploadProgress}%`;
@@ -93,7 +93,7 @@ const FileUpload = ({
             const urls = res.map((file) => file.url);
             onChange(urls);
           }}
-          onUploadError={(error) => {
+          onUploadError={() => {
             toast.error("Gagal mengunggah");
           }}
         />
@@ -122,14 +122,22 @@ const FileUpload = ({
             endpoint={endpoint}
             className="border-dashed hover:cursor-pointer"
             appearance={{
-              button: "text-white w-[200px] bg-muted-foreground",
+              // button: "text-white w-[200px] bg-muted-foreground",
+              button: ({ ready }) => {
+                if (ready) return "text-white w-[200px] bg-black/80";
+                return "text-white w-[200px] bg-muted-foreground";
+              },
               allowedContent: "text-muted-foreground",
+            }}
+            content={{
+              label: "Pilih File atau Drop File",
+              allowedContent: "Gambar atau File",
             }}
             onClientUploadComplete={(res) => {
               onChange(res);
               console.log(res);
             }}
-            onUploadError={(error) => {
+            onUploadError={() => {
               toast.error("Gagal mengunggah");
             }}
           />

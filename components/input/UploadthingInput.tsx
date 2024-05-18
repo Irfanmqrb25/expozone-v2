@@ -64,7 +64,7 @@ const UploadthingInput: React.FC<UploadthingInputProps> = ({
             button({ ready }) {
               if (ready) return "Ubah Gambar";
 
-              return "loading...";
+              return "Tunggu...";
             },
             allowedContent({ uploadProgress, isUploading }) {
               if (isUploading) return `Mengunggah ${uploadProgress}%`;
@@ -75,7 +75,7 @@ const UploadthingInput: React.FC<UploadthingInputProps> = ({
           onClientUploadComplete={(res) => {
             onChange(res?.[0].url);
           }}
-          onUploadError={(error: Error) => {
+          onUploadError={() => {
             console.log("Gagal mengunggah gambar");
           }}
         />

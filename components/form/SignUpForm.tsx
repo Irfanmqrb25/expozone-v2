@@ -1,6 +1,7 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useTransition } from "react";
+
 import AuthCard from "../card/AuthCard";
 import {
   Form,
@@ -10,15 +11,17 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useTransition } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { PasswordInput } from "../input/PasswordInput";
+
 import * as z from "zod";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { signUp } from "@/actions/auth";
+import { useForm } from "react-hook-form";
 import { SignUpSchema } from "@/lib/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "../ui/input";
-import { PasswordInput } from "../input/PasswordInput";
-import { Button } from "../ui/button";
-import { toast } from "sonner";
-import { signUp } from "@/actions/auth";
 
 const SignUpForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -110,7 +113,12 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button
+            type="submit"
+            className="flex items-center w-full gap-2"
+            disabled={isPending}
+          >
+            {isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             Daftar
           </Button>
         </form>

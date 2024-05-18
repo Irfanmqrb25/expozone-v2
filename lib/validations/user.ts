@@ -16,10 +16,11 @@ export const ChangePasswordSchema = z
       z
         .string()
         .min(8, {
-          message: "Password must be at least 8 characters long",
+          message: "Kata Sandi harus lebih dari 8 karakter",
         })
         .regex(/^(?=.*[A-Z]).{8,}$/, {
-          message: "Password must contain at least one uppercase letter.",
+          message:
+            "Kata sandi harus terdiri dari setidaknya satu huruf kapital",
         })
     ),
     confirmPassword: z.optional(z.string().min(8)),
@@ -33,7 +34,7 @@ export const ChangePasswordSchema = z
       return true;
     },
     {
-      message: "New password is required",
+      message: "Masukkan kata sandi baru",
       path: ["newPassword"],
     }
   )
@@ -46,7 +47,7 @@ export const ChangePasswordSchema = z
       return true;
     },
     {
-      message: "New password is required",
+      message: "Masukkan kata sandi lama",
       path: ["password"],
     }
   )
@@ -59,7 +60,7 @@ export const ChangePasswordSchema = z
       return true;
     },
     {
-      message: "Passwords do not match",
+      message: "Kata sandi baru tidak cocok",
       path: ["confirmPassword"],
     }
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -43,23 +43,31 @@ import UploadthingInput from "@/components/input/UploadthingInput";
 
 const UpdateStoreForm = ({ store }: { store: any }) => {
   const router = useRouter();
+  const [hasChanges, setHasChanges] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
+
+  const initialValues = useMemo(
+    () => ({
+      name: store.name || "",
+      image: store.image || "",
+      email: store.email || "",
+      country: store.country || "",
+      city: store.city || "",
+      address: store.address || "",
+      description: store.description || "",
+    }),
+    [store]
+  );
 
   const form = useForm<z.infer<typeof UpdateStoreSchema>>({
     resolver: zodResolver(UpdateStoreSchema),
-    defaultValues: {
-      name: store.name,
-      image: store.image || "",
-      email: store.email,
-      country: store.country,
-      city: store.city,
-      address: store.address,
-      description: store.description,
-    },
+    defaultValues: initialValues,
   });
 
   const imageWatch = form.watch("image");
   const isLoading = form.formState.isSubmitting;
+
+  const { watch, reset } = form;
 
   useEffect(() => {
     if (imageWatch) {
@@ -67,10 +75,27 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
     }
   }, [imageWatch, form]);
 
+  useEffect(() => {
+    const subscription = watch((values) => {
+      const isChanged =
+        values.name !== initialValues.name ||
+        values.image !== initialValues.image ||
+        values.email !== initialValues.email ||
+        values.country !== initialValues.country ||
+        values.city !== initialValues.city ||
+        values.address !== initialValues.address ||
+        values.description !== initialValues.description;
+      setHasChanges(isChanged);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, initialValues]);
+
   const onSubmit = async (data: z.infer<typeof UpdateStoreSchema>) => {
     try {
       await axios.put(`/api/store`, data);
       router.refresh();
+      reset(data);
+      setHasChanges(!hasChanges);
       toast.success("Profil toko berhasil diperbarui.");
     } catch (error) {
       toast.error("Terjadi kesalahan.");
@@ -202,7 +227,11 @@ const UpdateStoreForm = ({ store }: { store: any }) => {
                   Please wait
                 </Button>
               ) : (
-                <Button type="submit" className="w-full">
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isLoading || !hasChanges}
+                >
                   Simpan
                 </Button>
               )}
