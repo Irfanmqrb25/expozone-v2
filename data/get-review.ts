@@ -1,13 +1,12 @@
 import { db } from "@/lib/prisma";
-import getStore from "@/actions/getStore";
 
-export const getStoreProductReviews = async () => {
-  const store = await getStore();
-
+export const getStoreProductReviews = async (storeName: string) => {
   try {
     const products = await db.product.findMany({
       where: {
-        storeId: store?.id,
+        store: {
+          name: storeName,
+        },
       },
       select: {
         id: true,

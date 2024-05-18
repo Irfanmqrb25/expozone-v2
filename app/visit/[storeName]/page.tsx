@@ -1,6 +1,7 @@
 import getStorebyName from "@/actions/getStoreByName";
 import ProductCard from "@/components/card/ProductCard";
 import { getCurrentUser } from "@/data/get-user";
+import { formatStoreNameUrl } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
 
 interface IStoreParams {
@@ -9,10 +10,6 @@ interface IStoreParams {
 
 const DetailStorePage = async ({ params }: { params: IStoreParams }) => {
   const session = await getCurrentUser();
-
-  const formatStoreNameUrl = (storeName: string) => {
-    return storeName.split("-").join(" ");
-  };
 
   const storeUrl = formatStoreNameUrl(params.storeName);
 

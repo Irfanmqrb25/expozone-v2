@@ -18,6 +18,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import { PackageOpen, Search } from "lucide-react";
 import { ExtendedSession } from "@/next-auth";
+import { toast } from "sonner";
 
 interface SearchPageProps {
   session: ExtendedSession;
@@ -43,7 +44,7 @@ const SearchPageClient = ({ session }: SearchPageProps) => {
         }
         setResults(response.data);
       } catch (error) {
-        return { error: "Something went wrong" };
+        toast.error("Terjadi kesalahan!");
       } finally {
         setIsLoadingResults(false);
       }
@@ -58,9 +59,9 @@ const SearchPageClient = ({ session }: SearchPageProps) => {
           <div className="flex flex-col">
             <div className="flex items-center gap-2 text-2xl">
               <Search size={21} />
-              <p>{`Searching for "${query}"`}</p>
+              <p>{`Hasil pencarian "${query}"`}</p>
             </div>
-            <p className="text-muted-foreground">{`items matches (${results.length})`}</p>
+            <p className="text-muted-foreground">{`Produk yang cocok (${results.length})`}</p>
           </div>
         </div>
         <div className="mt-20">
@@ -100,9 +101,9 @@ const SearchPageClient = ({ session }: SearchPageProps) => {
         <div className="flex flex-col">
           <div className="flex items-center gap-2 text-2xl">
             <Search size={21} />
-            <p>{`Searching for "${query}"`}</p>
+            <p>{`Hasil pencarian "${query}"`}</p>
           </div>
-          <p className="text-muted-foreground">{`items matches (${results.length})`}</p>
+          <p className="text-muted-foreground">{`Produk yang cocok (${results.length})`}</p>
         </div>
       )}
       <div className="grid grid-cols-1 gap-5 mx-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-3 2xl:gap-5 xl:grid-cols-5">

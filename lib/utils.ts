@@ -29,3 +29,7 @@ export const rupiahFormat = (price: number) => {
   const rupiah = new Rupiah(price);
   return rupiah.getCurrency("Rp", "dot");
 };
+
+export const formatStoreNameUrl = (storeName: string) => {
+  return storeName.split("-").join(" ");
+};

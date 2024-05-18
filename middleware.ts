@@ -17,7 +17,14 @@ export default auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
 
   // Memeriksa apakah permintaan untuk route publik atau route yang memerlukan autentikasi
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute = publicRoutes.some((route) => {
+    if (route instanceof RegExp) {
+      return route.test(nextUrl.pathname);
+    }
+    return (
+      nextUrl.pathname === route || nextUrl.pathname.startsWith(`${route}/`)
+    );
+  });
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   // Jika permintaan untuk API autentikasi, lanjutkan ke middleware selanjutnya
@@ -53,5 +60,5 @@ export default auth((req) => {
 
 // Regex untuk menentukan route di mana middleware tidak harus dipanggil
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/(api|trpc)(.*)"],
 };

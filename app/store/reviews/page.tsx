@@ -1,11 +1,13 @@
 import CardReview from "@/components/card/CardReview";
 import EmptyMessage from "@/components/EmptyMessage";
 
+import getStore from "@/actions/getStore";
 import { TbMessage2Off } from "react-icons/tb";
 import { getStoreProductReviews } from "@/data/get-review";
 
 const StoreReviewsPage = async () => {
-  const reviews = await getStoreProductReviews();
+  const store = await getStore();
+  const reviews = await getStoreProductReviews(store?.name!);
 
   return (
     <div className="flex flex-col min-h-screen gap-4">

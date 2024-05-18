@@ -4,9 +4,16 @@ import CardReview from "@/components/card/CardReview";
 import { TbMessage2Off } from "react-icons/tb";
 import { getStoreProductReviews } from "@/data/get-review";
 import { BiMessageSquareDots } from "react-icons/bi";
+import { formatStoreNameUrl } from "@/lib/utils";
 
-const StoreReviewPage = async () => {
-  const reviews = await getStoreProductReviews();
+interface IStoreParams {
+  storeName: string;
+}
+
+const StoreReviewPage = async ({ params }: { params: IStoreParams }) => {
+  const storeUrl = formatStoreNameUrl(params.storeName);
+
+  const reviews = await getStoreProductReviews(storeUrl);
 
   return (
     <div className="flex flex-col gap-5">

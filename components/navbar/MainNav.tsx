@@ -49,11 +49,9 @@ const MainNav: React.FC<MainNavProps> = ({ session, store }) => {
         </div>
         <div className="flex items-center justify-end gap-2 md:gap-3">
           <SearchNav />
+          <CartSheet />
           {session ? (
-            <div className="flex items-center gap-3">
-              <CartSheet />
-              <AvatarProfile session={session} store={store!} />
-            </div>
+            <AvatarProfile session={session} store={store!} />
           ) : (
             <Link
               href="/auth/sign-in"

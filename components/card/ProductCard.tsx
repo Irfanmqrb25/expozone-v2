@@ -18,6 +18,7 @@ import { rupiahFormat } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import { ExtendedSession } from "@/next-auth";
 import { Product, Store } from "@prisma/client";
+import { Button } from "../ui/button";
 
 interface ProductCard {
   productData: Product & {
@@ -84,20 +85,20 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
               {productData.description}
             </CardDescription>
           </div>
-          <div className="flex items-center justify-between">
-            <p className="font-medium line-clamp-1">
-              {rupiahFormat(Number(productData.price))}
-            </p>
-            <button
-              type="button"
-              onClick={handleAddToCart}
-              className="z-10 flex items-center gap-1 text-sm font-medium text-black/70 hover:text-black"
-            >
-              <ShoppingCart size={14} />
-              Keranjang
-            </button>
-          </div>
         </Link>
+        <div className="flex items-center justify-between">
+          <p className="font-medium line-clamp-1">
+            {rupiahFormat(Number(productData.price))}
+          </p>
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="z-10 flex items-center gap-1 text-sm font-medium text-black/70 hover:text-black"
+          >
+            <ShoppingCart size={14} />
+            Keranjang
+          </button>
+        </div>
       </CardContent>
     </Card>
   );

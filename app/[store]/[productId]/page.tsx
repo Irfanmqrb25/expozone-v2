@@ -23,6 +23,7 @@ const DetailProductPage = async ({ params }: { params: IProductParams }) => {
   return (
     <DetailProductPageClient
       product={product}
+      storeName={params.store}
       session={session!}
       reviews={reviews}
     />

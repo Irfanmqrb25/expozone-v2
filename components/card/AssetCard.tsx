@@ -51,15 +51,15 @@ const AssetCard = ({
           </div>
         )}
       </div>
-      <CardHeader className="flex flex-col items-center gap-2">
-        <div className="flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full">
+      <CardHeader className="flex flex-col gap-2">
+        <div className="flex items-center justify-center w-20 h-20 mx-auto bg-gray-100 rounded-full">
           {isOwnProduct ? <FolderIcon size={28} /> : <FolderLock size={28} />}
         </div>
-        <CardTitle className="text-base font-medium line-clamp-1">
+        <CardTitle className="text-base font-medium text-center line-clamp-1">
           {assetData.name}
         </CardTitle>
         {assetData.name !== "External URL" && (
-          <CardDescription>
+          <CardDescription className="text-center">
             {formattedFileSize(assetData?.size!)}
           </CardDescription>
         )}

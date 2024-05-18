@@ -25,21 +25,27 @@ import { ProductReview } from "@/types";
 import axios, { AxiosError } from "axios";
 import { Rupiah } from "@jetmiky/rupiahjs";
 import { ExtendedSession } from "@/next-auth";
+import { LiaHandshake } from "react-icons/lia";
 import { BsArrowUpRight } from "react-icons/bs";
 import { BiMessageSquareDots } from "react-icons/bi";
-import { Product, ProductAsset, Review, Store } from "@prisma/client";
+import { Product, ProductAsset, Store } from "@prisma/client";
 
 interface DetailProductPageClientProps {
   product: Product & {
     store: Store;
     productAssets: ProductAsset[];
+    _count: {
+      orderItems: number;
+    };
   };
+  storeName: string;
   session: ExtendedSession;
   reviews: ProductReview[];
 }
 
 const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
   product,
+  storeName,
   session,
   reviews,
 }) => {
@@ -61,6 +67,11 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
   };
 
   const handleCheckOut = async () => {
+    if (!session) {
+      return router.push(
+        `/auth/sign-in?callbackUrl=%2f${storeName}%2f${product.id}`
+      );
+    }
     setLoading(true);
     try {
       const response = await axios.post("/api/midtrans/transactions", {
@@ -168,6 +179,13 @@ const DetailProductPageClient: React.FC<DetailProductPageClientProps> = ({
               </Button>
             </div>
             <FavoriteButton productId={product.id} session={session} />
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-0.5">
+              <LiaHandshake size={20} />
+              <p>Terjual:</p>
+            </div>
+            <p className="font-medium">{product._count.orderItems}</p>
           </div>
           <Separator />
           <Accordion

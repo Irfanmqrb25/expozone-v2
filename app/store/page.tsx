@@ -13,7 +13,7 @@ const StorePage = async () => {
         <div className="flex items-center gap-2">
           <Store />
           <h1 className="text-2xl font-semibold lg:text-3xl">
-            Create Your Store
+            Buat Toko Anda Sekarang
           </h1>
         </div>
         <div className="relative w-full h-[350px] overflow-hidden rounded-md md:h-[400px] md:w-[400px] lg:w-[450px] lg:h-[450px]">

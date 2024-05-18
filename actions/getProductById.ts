@@ -15,6 +15,11 @@ export default async function getProductById(params: IParams) {
       include: {
         store: true,
         productAssets: true,
+        _count: {
+          select: {
+            orderItems: true,
+          },
+        },
       },
     });
 

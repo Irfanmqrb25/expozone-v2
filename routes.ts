@@ -7,8 +7,11 @@ export const publicRoutes = [
   "/",
   "/auth/email-verification",
   "/featured",
+  /^\/[^\/]+\/[^\/]+$/, // for dynamic routes like /[storeName]/[productName]
   "/discover",
   "/products",
+  "/visit",
+  "/api/product",
   "/api/uploadthing",
   "/api/midtrans/webhooks",
 ];
