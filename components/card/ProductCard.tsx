@@ -50,6 +50,7 @@ const ProductCard: React.FC<ProductCard> = ({ productData, session }) => {
             className="object-cover border-b border-black w-full h-[270px] md:h-[210px]"
             height={500}
             width={500}
+            loading="lazy"
             src={productData.images[0]}
           />
         </Link>

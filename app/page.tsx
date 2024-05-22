@@ -49,13 +49,15 @@ const LandingPage = async () => {
         <div className="bg-[#FCE700] w-full lg:w-1/2 h-[500px] flex justify-center my-auto relative">
           <Image
             src="/assets/landing-page/blob.svg"
-            alt="..."
+            loading="lazy"
+            alt="landing page blob"
             width={500}
             height={500}
           />
           <Image
             src="/assets/landing-page/person.svg"
-            alt="..."
+            loading="lazy"
+            alt="landing page image"
             width={250}
             height={250}
             className="absolute top-10"
@@ -84,6 +86,7 @@ const LandingPage = async () => {
               alt="become a new seller"
               src="/assets/landing-page/become-seller.svg"
               fill
+              loading="lazy"
               className="object-cover w-full h-full"
             />
           </div>
@@ -144,6 +147,7 @@ const LandingPage = async () => {
               alt="product categories"
               src="/assets/landing-page/category-product.svg"
               fill
+              loading="lazy"
               className="object-cover"
             />
           </div>

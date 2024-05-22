@@ -21,6 +21,7 @@ export default async function NotFound() {
             <Image
               src="/assets/not-found.jpg"
               alt="image not found"
+              loading="lazy"
               width={400}
               height={400}
             />

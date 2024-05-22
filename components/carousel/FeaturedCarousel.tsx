@@ -69,6 +69,7 @@ const FeaturedCarousel = () => {
                 alt={item.title}
                 src={item.src}
                 style={{ objectFit: "cover" }}
+                loading="lazy"
                 fill
               />
             </div>
