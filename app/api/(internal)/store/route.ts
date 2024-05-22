@@ -8,14 +8,14 @@ export async function POST(request: Request) {
   const session = await getCurrentUser();
 
   if (!session) {
-    return NextResponse.json("unauthorized", { status: 401 });
+    return NextResponse.json("Akses tidak diizinkan", { status: 401 });
   }
 
   const body = await request.json();
   const { name, image, email, country, city, address, description } = body;
 
   if (!name || !country || !city || !address || !description)
-    return NextResponse.json("All fields are required", { status: 400 });
+    return NextResponse.json("Semua kolom harus diisi!", { status: 400 });
 
   const storeExists = await db.store.findUnique({
     where: {
@@ -54,8 +54,23 @@ export async function PUT(request: Request) {
   const body = await request.json();
   const { name, image, email, country, city, address, description } = body;
 
-  if (!name || !image || !country || !city || !address || !description)
-    return NextResponse.json("All fields are required", { status: 400 });
+  if (!name)
+    return NextResponse.json("Nama toko tidak boleh kosong", { status: 400 });
+
+  if (!email)
+    return NextResponse.json("Email tidak boleh kosong", { status: 400 });
+
+  if (!country)
+    return NextResponse.json("Negara tidak boleh kosong", { status: 400 });
+
+  if (!city)
+    return NextResponse.json("Kota tidak boleh kosong", { status: 400 });
+
+  if (!address)
+    return NextResponse.json("Alamat tidak boleh kosong", { status: 400 });
+
+  if (!description)
+    return NextResponse.json("Deskripsi tidak boleh kosong", { status: 400 });
 
   const updatedStore = await db.store.update({
     where: { id: store?.id },
@@ -78,12 +93,16 @@ export async function DELETE(request: Request) {
   const store = await getStore();
 
   if (!session) {
-    return NextResponse.json("unauthorized", { status: 401 });
+    return NextResponse.json("Akses tidak diizinkan", { status: 401 });
+  }
+
+  if (store?.userId !== session.id) {
+    return NextResponse.json("Akses tidak diizinkan", { status: 401 });
   }
 
   await db.store.delete({
     where: { id: store?.id },
   });
 
-  return NextResponse.json({ message: "Store deleted" });
+  return NextResponse.json({ message: "Toko berhasil di hapus" });
 }
