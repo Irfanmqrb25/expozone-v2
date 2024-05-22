@@ -19,7 +19,7 @@ interface MainNavProps {
 const MainNav: React.FC<MainNavProps> = ({ session, store }) => {
   const router = useRouter();
   return (
-    <nav className="fixed z-[99999] w-full px-4 py-4 bg-black shadow-sm md:px-8 lg:px-16">
+    <nav className="fixed z-[100] w-full px-4 py-4 bg-black shadow-sm md:px-8 lg:px-16">
       <div className="flex items-center justify-between w-full text-white">
         <div className="flex items-center">
           <div className="mt-[5px] lg:hidden">

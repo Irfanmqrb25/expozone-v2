@@ -41,13 +41,15 @@ const CartSheet = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="flex items-center px-4 bg-white rounded-full h-9">
-        <ShoppingCart size={20} color="black" />
-        <span className="ml-2 text-sm font-medium text-black">
-          {cart.items.length}
-        </span>
+      <SheetTrigger className="relative flex items-center justify-center bg-white rounded-full h-9 w-9">
+        <ShoppingCart className="w-5 h-5 text-black" />
+        {cart.items.length > 0 && (
+          <span className="absolute top-1 right-1 inline-flex items-center justify-center w-4 h-4 text-[10px] text-white bg-red-500 rounded-full">
+            {cart.items.length}
+          </span>
+        )}
       </SheetTrigger>
-      <SheetContent className="flex flex-col w-full sm:max-w-lg">
+      <SheetContent className="flex flex-col w-full sm:max-w-lg z-[110]">
         <SheetHeader>
           <SheetTitle>Keranjang</SheetTitle>
         </SheetHeader>

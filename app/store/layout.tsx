@@ -23,7 +23,7 @@ export default async function Layout({
       <Container>
         <div className="h-full">
           {store && (
-            <div className="pt-16 mb-5 space-y-3">
+            <div className="pt-20 mb-5 space-y-3">
               <div>
                 <div className="flex items-center gap-2">
                   <Store size={26} />

@@ -10,15 +10,15 @@ import {
 } from "@/components/ui/sheet";
 import { ScrollArea } from "../ui/scroll-area";
 
-import { Menu, Search, ShoppingBag, Sparkles, Store } from "lucide-react";
+import { AlignLeft, Search, ShoppingBag, Sparkles, Store } from "lucide-react";
 
 const MobileSheet = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <Menu size={30} />
+        <AlignLeft size={30} />
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="z-[110]">
         <SheetHeader>
           <SheetTitle className="flex gap-2 text-2xl">
             <Image

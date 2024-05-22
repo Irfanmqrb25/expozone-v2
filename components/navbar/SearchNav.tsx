@@ -58,7 +58,7 @@ const SearchNav = () => {
         className="relative p-0 bg-white rounded-full text-muted-foreground h-9 w-9 hover:bg-white xl:w-60 xl:justify-start xl:px-3 xl:py-2"
       >
         <Search
-          className="w-4 h-4 text-black xl:mr-2 md:text-muted-foreground"
+          className="w-5 h-5 text-black xl:mr-2 md:text-muted-foreground"
           aria-hidden="true"
         />
         <span className="hidden xl:inline-flex">Cari produk...</span>

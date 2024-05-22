@@ -48,7 +48,7 @@ const AvatarProfile = ({
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-48 bg-white"
+            className="w-48 bg-white z-[110]"
             side="bottom"
             align="end"
           >
