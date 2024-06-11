@@ -116,7 +116,15 @@ export async function GET(request: Request) {
         },
       });
 
-      return NextResponse.json(topProducts);
+      const sortedTopProducts = bestSellingProducts.map(
+        (bestSellingProduct) => {
+          return topProducts.find(
+            (product) => product.id === bestSellingProduct.productId
+          );
+        }
+      );
+
+      return NextResponse.json(sortedTopProducts);
     }
 
     const products = await db.product.findMany({

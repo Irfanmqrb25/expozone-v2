@@ -106,7 +106,7 @@ const SearchPageClient = ({ session }: SearchPageProps) => {
           <p className="text-muted-foreground">{`Produk yang cocok (${results.length})`}</p>
         </div>
       )}
-      <div className="grid grid-cols-1 gap-5 mx-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-3 2xl:gap-5 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-5 mx-1 mb-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-2 2xl:gap-5 xl:grid-cols-5 3xl:grid-cols-6">
         {isLoadingResults
           ? Array.from({ length: 10 }).map((_, i) => (
               <Card

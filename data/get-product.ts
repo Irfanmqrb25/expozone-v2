@@ -95,7 +95,13 @@ export const getBestSellingProducts = async () => {
       },
     });
 
-    return topProducts;
+    const sortedTopProducts = bestSellingProducts.map((bestSellingProduct) => {
+      return topProducts.find(
+        (product) => product.id === bestSellingProduct.productId
+      );
+    });
+
+    return sortedTopProducts;
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch best selling products");

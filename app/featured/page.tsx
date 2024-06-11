@@ -80,7 +80,7 @@ const FeaturedPage = async () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 mt-7">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-medium md:text-3xl">Penjualan Terbaik</h1>
           <Link
@@ -94,8 +94,8 @@ const FeaturedPage = async () => {
         <div className="grid grid-cols-1 gap-5 mx-1 mb-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-3 2xl:gap-5 xl:grid-cols-5">
           {TopProducts?.map((product) => (
             <ProductCard
-              key={product.id}
-              productData={product}
+              key={product?.id}
+              productData={product!}
               session={user!}
             />
           ))}
