@@ -18,7 +18,6 @@ import { rupiahFormat } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import { ExtendedSession } from "@/next-auth";
 import { Product, Store } from "@prisma/client";
-import { Button } from "../ui/button";
 
 interface ProductCard {
   productData: Product & {

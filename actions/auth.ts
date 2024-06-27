@@ -95,9 +95,18 @@ export const signIn = async (
   // Mnedapatkan pengguna yang sudah ada/terbuat berdasarkan email
   const existingUser = await getUserByEmail(email);
 
-  // Jika pengguna tidak ditemukan atau email/password tidak tersedia, kembalikan pesan kesalahan
-  if (!existingUser || !existingUser.email || !existingUser.password) {
+  // Jika email pengguna tidak ditemukan
+  if (!existingUser || !existingUser.email) {
     return { error: "Alamat email tidak ditemukan" };
+  }
+
+  // Periksa apakah password yang dimasukkan cocok
+  const isPasswordValid = await bcrypt.compare(
+    password,
+    existingUser.password!
+  );
+  if (!isPasswordValid) {
+    return { error: "Password yang anda masukkan salah" };
   }
 
   // Jika email belum terverifikasi

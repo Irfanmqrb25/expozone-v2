@@ -46,7 +46,6 @@ const SignInForm = () => {
         signIn(values, callbackUrl)
           .then((data) => {
             if (data?.error) {
-              form.reset();
               return toast.error(data.error);
             }
             if (data?.success) {

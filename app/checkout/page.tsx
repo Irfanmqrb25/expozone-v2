@@ -1,7 +1,6 @@
 import CheckoutList from "@/components/checkout/CheckoutList";
 import CheckoutSummary from "@/components/checkout/CheckoutSummary";
 import { ShoppingCart } from "lucide-react";
-import React from "react";
 
 const CheckoutPage = () => {
   return (

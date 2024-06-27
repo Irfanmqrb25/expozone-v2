@@ -22,7 +22,7 @@ const AssetsPage = async () => {
         </p>
       </div>
       {assets.length > 0 ? (
-        <div className="grid grid-cols-1 gap-5 mx-1 md:gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-5 md:gap-3 2xl:gap-x-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-8">
           {assets.map((item) => (
             <AssetCard
               key={item?.id}

@@ -7,11 +7,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import axios from "axios";
+import fileDownload from "js-file-download";
+import { toast } from "sonner";
+import { Lock } from "lucide-react";
 import { formattedFileSize } from "@/lib/utils";
 import { ProductAsset } from "@prisma/client";
-import { Lock } from "lucide-react";
 import { Download, FolderIcon, FolderLock, Trash } from "lucide-react";
-import { toast } from "sonner";
 
 interface AssetCardProps {
   assetData: ProductAsset;
@@ -26,11 +28,20 @@ const AssetCard = ({
   isOwnProduct,
   onRemove,
 }: AssetCardProps) => {
-  const handleDownloadAsset = () => {
+  const handleDownloadAsset = async (url: string, fileName: string) => {
     if (!isOwnProduct) {
       return toast.error("Beli produk untuk mendapatkan aset!");
     }
-    window.open(assetData.url, "_blank");
+    await axios
+      .get(url, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        fileDownload(res.data, fileName);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -38,7 +49,9 @@ const AssetCard = ({
       <div className="absolute flex items-center gap-2 top-1 right-1">
         <div
           className="p-1 border rounded-md cursor-pointer hover:bg-gray-100"
-          onClick={handleDownloadAsset}
+          onClick={() =>
+            handleDownloadAsset(assetData.url, assetData.name ?? "External URL")
+          }
         >
           {isOwnProduct ? <Download size={16} /> : <Lock size={16} />}
         </div>
