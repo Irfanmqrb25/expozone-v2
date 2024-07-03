@@ -34,39 +34,39 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
   const router = useRouter();
 
   const columns: ColumnDef<OrdersColumn>[] = [
-    {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={table.getIsAllPageRowsSelected()}
-          onCheckedChange={(value) => {
-            table.toggleAllPageRowsSelected(!!value);
-            setSelectedRowIds((prev) =>
-              prev.length === orderData.length
-                ? []
-                : orderData.map((row) => row.id)
-            );
-          }}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => {
-            row.toggleSelected(!!value);
-            setSelectedRowIds((prev) =>
-              value
-                ? [...prev, row.original.id]
-                : prev.filter((id) => id !== row.original.id)
-            );
-          }}
-          aria-label="Select row"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
+    // {
+    //   id: "select",
+    //   header: ({ table }) => (
+    //     <Checkbox
+    //       checked={table.getIsAllPageRowsSelected()}
+    //       onCheckedChange={(value) => {
+    //         table.toggleAllPageRowsSelected(!!value);
+    //         setSelectedRowIds((prev) =>
+    //           prev.length === orderData.length
+    //             ? []
+    //             : orderData.map((row) => row.id)
+    //         );
+    //       }}
+    //       aria-label="Select all"
+    //     />
+    //   ),
+    //   cell: ({ row }) => (
+    //     <Checkbox
+    //       checked={row.getIsSelected()}
+    //       onCheckedChange={(value) => {
+    //         row.toggleSelected(!!value);
+    //         setSelectedRowIds((prev) =>
+    //           value
+    //             ? [...prev, row.original.id]
+    //             : prev.filter((id) => id !== row.original.id)
+    //         );
+    //       }}
+    //       aria-label="Select row"
+    //     />
+    //   ),
+    //   enableSorting: false,
+    //   enableHiding: false,
+    // },
     {
       accessorKey: "id",
       header: "Order ID",
@@ -78,7 +78,7 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
       cell: ({ row }) => <p>{row.original.product.name}</p>,
     },
     {
-      accessorKey: "product",
+      accessorKey: "price",
       header: "Harga",
       cell: ({ row }) => (
         <p>{rupiahFormat(Number(row.original.product.price))}</p>
@@ -99,10 +99,10 @@ export default function OrderTable({ orderData, store }: OrderTableProps) {
       accessorKey: "createdAt",
       header: "Dipesan Pada",
     },
-    {
-      id: "actions",
-      cell: ({ row }) => <CellActionsOrder data={row.original} />,
-    },
+    // {
+    //   id: "actions",
+    //   cell: ({ row }) => <CellActionsOrder data={row.original} />,
+    // },
   ];
 
   async function deleteOrder(orderId: string) {
