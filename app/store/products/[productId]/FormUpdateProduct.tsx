@@ -71,6 +71,9 @@ const FormUpdateProduct: React.FC<FormUpdateProductProps> = ({ data }) => {
   const productAssetWatch = form.watch("productAssets");
 
   const onUpdate = async (data: z.infer<typeof ProductSchema>) => {
+    if (typeof data.productAssets === "string") {
+      data.productAssets = [{ name: "External URL", url: data.productAssets }];
+    }
     try {
       await axios.patch(`/api/product/${params.productId}`, data);
       router.refresh();
