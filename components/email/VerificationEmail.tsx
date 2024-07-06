@@ -34,7 +34,9 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
             <Section style={coverSection}>
               <Section style={imageSection}>
                 <Img
-                  src={`${baseUrl}/brand-logo.svg`}
+                  src={
+                    "https://w7.pngwing.com/pngs/875/224/png-transparent-amazon-com-amazon-web-services-logo-cloud-computing-cloud-computing-text-service-logo.png"
+                  }
                   width="75"
                   height="45"
                   alt="expozone logo"
@@ -48,7 +50,7 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
                   Silakan konfirmasi dengan menekan tombol di bawah. Jika Anda
                   tidak ingin membuat akun, Anda dapat mengabaikan pesan ini.
                 </Text>
-                <Section className="flex justify-center my-20 text-center">
+                <Section style={verificationSection}>
                   <Button
                     className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
                     href={confirmLink}
@@ -135,6 +137,7 @@ const verificationSection = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  textAlign: "center" as const,
 };
 
 const mainText = { ...text, marginBottom: "14px" };
