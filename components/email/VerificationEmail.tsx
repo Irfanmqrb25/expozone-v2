@@ -37,8 +37,8 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
                   src={
                     "https://utfs.io/f/16c04d0b-1fa8-4c82-85a6-f74378cb28d6-4oy5f1.png"
                   }
-                  width="359"
-                  height="45"
+                  width="100"
+                  height="100"
                   alt="expozone logo"
                 />
               </Section>
