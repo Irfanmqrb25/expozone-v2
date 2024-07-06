@@ -35,7 +35,7 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
               <Section style={imageSection}>
                 <Img
                   src={
-                    "https://w7.pngwing.com/pngs/875/224/png-transparent-amazon-com-amazon-web-services-logo-cloud-computing-cloud-computing-text-service-logo.png"
+                    "https://utfs.io/f/16c04d0b-1fa8-4c82-85a6-f74378cb28d6-4oy5f1.png"
                   }
                   width="75"
                   height="45"
@@ -59,6 +59,7 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
                   </Button>
                 </Section>
               </Section>
+              <Hr />
               <Section style={lowerSection}>
                 <Text style={cautionText}>
                   Expozone tidak akan pernah menghubungi Anda melalui email
@@ -109,7 +110,7 @@ const text = {
 const imageSection = {
   backgroundColor: "#000000",
   display: "flex",
-  padding: "20px 0",
+  padding: "20px 35px",
   alignItems: "center",
   justifyContent: "center",
 };
@@ -124,13 +125,6 @@ const footerText = {
   ...text,
   fontSize: "12px",
   padding: "0 20px",
-};
-
-const verifyText = {
-  ...text,
-  margin: 0,
-  fontWeight: "bold",
-  textAlign: "center" as const,
 };
 
 const verificationSection = {
