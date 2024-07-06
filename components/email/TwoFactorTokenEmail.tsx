@@ -47,7 +47,7 @@ export default function TwoFactorTokenEmail({
 
                 <Text style={codeText}>{token}</Text>
                 <Text style={validityText}>
-                  (This code is valid for 10 minutes)
+                  (Kode verifikasi valid selama 5 menit)
                 </Text>
               </Section>
             </Section>
@@ -98,9 +98,9 @@ const text = {
 };
 
 const imageSection = {
-  backgroundColor: "#252f3d",
+  backgroundColor: "#000000",
   display: "flex",
-  padding: "20px 0",
+  padding: "20px 35px",
   alignItems: "center",
   justifyContent: "center",
 };
@@ -142,6 +142,7 @@ const verificationSection = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  textAlign: "center" as const,
 };
 
 const mainText = { ...text, marginBottom: "14px" };
