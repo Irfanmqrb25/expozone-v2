@@ -42,7 +42,7 @@ export default function TwoFactorTokenEmail({
                 Kode konfirmasi Anda ada di bawah ini - masukkan kode tersebut
                 di kolom yang disediakan untuk menyelesaikan proses verifikasi.
               </Text>
-              <Section style={verificationSection}>
+              <Section>
                 <Text style={verifyText}>Kode Verifikasi</Text>
 
                 <Text style={codeText}>{token}</Text>
@@ -135,13 +135,6 @@ const codeText = {
 const validityText = {
   ...text,
   margin: "0px",
-  textAlign: "center" as const,
-};
-
-const verificationSection = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
   textAlign: "center" as const,
 };
 
