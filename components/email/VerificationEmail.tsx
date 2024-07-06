@@ -10,6 +10,7 @@ import {
   Preview,
   Section,
   Text,
+  Tailwind,
 } from "@react-email/components";
 import * as React from "react";
 
@@ -27,51 +28,50 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
     <Html>
       <Head />
       <Preview>Expozone Email Verification</Preview>
-      <Body style={main}>
-        <Container style={container}>
-          <Section style={coverSection}>
-            <Section style={imageSection}>
-              <Img
-                src={`${baseUrl}/assets/brand-logo.svg`}
-                width="75"
-                height="45"
-                alt="expozone logo"
-              />
-            </Section>
-            <Section style={upperSection}>
-              <Heading style={h1}>Konfirmasi Alamat Email Anda</Heading>
-              <Text style={mainText}>
-                Terima kasih telah memulai proses pembuatan akun Expozone baru.
-                Kami ingin memastikan bahwa ini benar-benar Anda. Silakan
-                konfirmasi dengan menekan tombol di bawah. Jika Anda tidak ingin
-                membuat akun, Anda dapat mengabaikan pesan ini.
-              </Text>
-              <Section style={verificationSection}>
-                <Text style={verifyText}>Tekan tombol untuk konfirmasi</Text>
-
-                <Button
-                  className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
-                  href={confirmLink}
-                >
-                  Konfirmasi
-                </Button>
+      <Tailwind>
+        <Body style={main}>
+          <Container style={container}>
+            <Section style={coverSection}>
+              <Section style={imageSection}>
+                <Img
+                  src={`${baseUrl}/brand-logo.svg`}
+                  width="75"
+                  height="45"
+                  alt="expozone logo"
+                />
+              </Section>
+              <Section style={upperSection}>
+                <Heading style={h1}>Konfirmasi Alamat Email Anda</Heading>
+                <Text style={mainText}>
+                  Terima kasih telah memulai proses pembuatan akun Expozone
+                  baru. Kami ingin memastikan bahwa ini benar-benar Anda.
+                  Silakan konfirmasi dengan menekan tombol di bawah. Jika Anda
+                  tidak ingin membuat akun, Anda dapat mengabaikan pesan ini.
+                </Text>
+                <Section className="flex justify-center my-20 text-center">
+                  <Button
+                    className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
+                    href={confirmLink}
+                  >
+                    Konfirmasi Email
+                  </Button>
+                </Section>
+              </Section>
+              <Section style={lowerSection}>
+                <Text style={cautionText}>
+                  Expozone tidak akan pernah menghubungi Anda melalui email
+                  untuk meminta Anda mengungkapkan kata sandi, nomor kartu
+                  kredit, atau informasi rekening bank Anda.
+                </Text>
               </Section>
             </Section>
-            <Hr />
-            <Section style={lowerSection}>
-              <Text style={cautionText}>
-                Expozone tidak akan pernah menghubungi Anda melalui email untuk
-                meminta Anda mengungkapkan atau memverifikasi kata sandi, nomor
-                kartu kredit, atau informasi rekening bank Anda.
-              </Text>
-            </Section>
-          </Section>
-          <Text style={footerText}>
-            Pesan ini diproduksi dan didistribusikan oleh Expozone, Expozone ©
-            2024.
-          </Text>
-        </Container>
-      </Body>
+            <Text style={footerText}>
+              Pesan ini diproduksi dan didistribusikan oleh Expozone, Expozone ©
+              2024.
+            </Text>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
 }
