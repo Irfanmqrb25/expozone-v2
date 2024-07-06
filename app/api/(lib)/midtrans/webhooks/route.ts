@@ -43,6 +43,22 @@ export async function POST(req: Request) {
           },
         });
 
+        const order = await db.order.findUnique({
+          where: {
+            id: body.order_id,
+          },
+          include: {
+            orderItems: {
+              include: {
+                product: true,
+                store: true,
+              },
+            },
+          },
+        });
+
+        await sendReceiptEmail(user?.email!, order?.id!, order!, user?.name!);
+
         return new Response("OK");
       }
     } else if (transactionStatus == "settlement") {
