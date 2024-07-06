@@ -38,8 +38,8 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
                     "https://utfs.io/f/4c7a2fa4-049e-4332-9103-c57f5a355ae7-96c2a5.png"
                   }
                   alt="expozone logo"
-                  width={80}
-                  height={80}
+                  width={45}
+                  height={45}
                 />
               </Section>
               <Section style={upperSection}>

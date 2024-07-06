@@ -1,8 +1,11 @@
 import crypto from "crypto";
 import { db } from "@/lib/prisma";
+import { sendReceiptEmail } from "@/lib/mail";
+import { getCurrentUser } from "@/data/get-user";
 
 export async function POST(req: Request) {
   try {
+    const user = await getCurrentUser();
     const body = await req.json();
 
     const hash = crypto
@@ -53,6 +56,22 @@ export async function POST(req: Request) {
           status: "PAID",
         },
       });
+
+      const order = await db.order.findUnique({
+        where: {
+          id: body.order_id,
+        },
+        include: {
+          orderItems: {
+            include: {
+              product: true,
+              store: true,
+            },
+          },
+        },
+      });
+
+      await sendReceiptEmail(user?.email!, order?.id!, order!, user?.name!);
 
       return new Response("OK");
     } else if (
