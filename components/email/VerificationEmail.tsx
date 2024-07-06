@@ -35,10 +35,11 @@ export function VerificationEmail({ token }: ExpozoneVerifyEmailProps) {
               <Section style={imageSection}>
                 <Img
                   src={
-                    "https://utfs.io/f/16c04d0b-1fa8-4c82-85a6-f74378cb28d6-4oy5f1.png"
+                    "https://utfs.io/f/4c7a2fa4-049e-4332-9103-c57f5a355ae7-96c2a5.png"
                   }
                   alt="expozone logo"
-                  className="w-24 h-24"
+                  width={80}
+                  height={80}
                 />
               </Section>
               <Section style={upperSection}>
