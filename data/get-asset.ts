@@ -12,6 +12,7 @@ export const getUserAssets = async () => {
     const userOrder = await db.order.findMany({
       where: {
         userId: user.id,
+        status: "PAID",
       },
       select: {
         orderItems: {

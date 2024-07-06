@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 
+import { VerificationEmail } from "@/components/email/VerificationEmail";
+
 const resend = new Resend("re_NY1NEpxG_6JPbm89h7NF7NezGRtruhbsj");
 
 const domain = process.env.NEXT_PUBLIC_APP_URL;
@@ -11,7 +13,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     from: "expozone <no-reply@irfanmuqorib.dev>",
     to: email,
     subject: "Expozone Email Verification",
-    html: `<p>Click <a href="${confirmLink}">here</a> to confirm your account.</p>`,
+    react: <VerificationEmail token={token} />,
   });
 };
 
