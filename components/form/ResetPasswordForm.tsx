@@ -29,8 +29,6 @@ const ResetPasswordForm = () => {
   const token = params.get("token");
   const [isPending, startTransition] = useTransition();
 
-  if (!token) return redirect("/auth/sign-in");
-
   const form = useForm<z.infer<typeof NewPasswordSchema>>({
     resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
@@ -38,6 +36,8 @@ const ResetPasswordForm = () => {
       confirmPassword: "",
     },
   });
+
+  if (!token) return redirect("/auth/sign-in");
 
   const onSubmit = (data: z.infer<typeof NewPasswordSchema>) => {
     startTransition(() => {
