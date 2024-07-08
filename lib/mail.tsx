@@ -5,6 +5,7 @@ import TwoFactorTokenEmail from "@/components/email/TwoFactorTokenEmail";
 import ReceiptEmail from "@/components/email/ReceiptEmail";
 import { Order, OrderItem, Store } from "@prisma/client";
 import { GetOrderItems } from "@/types";
+import { ResetPasswordEmail } from "@/components/email/PasswordResetEmail";
 
 const resend = new Resend("re_NY1NEpxG_6JPbm89h7NF7NezGRtruhbsj");
 
@@ -20,13 +21,11 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
-  const resetLink = `${domain}/auth/new-password?token=${token}`;
-
   await resend.emails.send({
     from: "expozone <no-reply@irfanmuqorib.dev>",
     to: email,
     subject: "Reset your password",
-    html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`,
+    react: <ResetPasswordEmail token={token} />,
   });
 };
 

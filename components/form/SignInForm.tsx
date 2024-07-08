@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -101,7 +102,7 @@ const SignInForm = () => {
             />
           )}
           {!showTwoFactor && (
-            <>
+            <div className="space-y-3 flex flex-col">
               <FormField
                 control={form.control}
                 name="email"
@@ -137,7 +138,13 @@ const SignInForm = () => {
                   </FormItem>
                 )}
               />
-            </>
+              <Link
+                href="/auth/forgot-password"
+                className="text-sm hover:underline"
+              >
+                Lupa kata sandi?
+              </Link>
+            </div>
           )}
           <Button
             type="submit"
